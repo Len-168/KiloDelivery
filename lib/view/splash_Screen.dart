@@ -1,4 +1,4 @@
-import 'package:delivery_app/controller/splashController.dart';
+import 'package:delivery_app/controller/splash_Controller.dart';
 import 'package:delivery_app/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

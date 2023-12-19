@@ -1,4 +1,4 @@
-import 'package:delivery_app/widget/login_Screen.dart';
+import 'package:delivery_app/view/authScreen/login_Screen.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {

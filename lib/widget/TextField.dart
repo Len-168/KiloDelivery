@@ -4,19 +4,30 @@ import 'package:delivery_app/constant/constant.dart';
 import 'package:flutter/material.dart';
 
 class TextFormFieldReuse extends StatelessWidget {
-  const TextFormFieldReuse({
+  TextFormFieldReuse({
     super.key,
+    this.obscureText,
+    this.onPressedFunction,
+    this.icons,
+    this.controller,
   });
 
+  final bool? obscureText;
+  final TextEditingController? controller;
+  final VoidCallback? onPressedFunction;
+  final IconData? icons;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText ?? false,
+      controller: controller,
       style: TextStyle(
         color: Colors.black,
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        suffixIcon: Icon(icons),
         focusColor: Colors.white,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.black),

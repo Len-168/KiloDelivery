@@ -109,20 +109,20 @@ class LoginScreen extends StatelessWidget {
         children: [
           SizedBox(height: 35),
           TextFieldLable(labelText: "Email address"),
-          TextFormFieldReuse(controller: authController.email),
+          TextFormFieldReuse(controller: authController.Lemail),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Password"),
           TextFormFieldReuse(
             icons: Icons.visibility_off_outlined,
-            controller: authController.password,
+            controller: authController.Lpassword,
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Forgot Password?"),
           Spacer(),
           InkWell(
             onTap: () {
-              String email = authController.email.text;
-              String password = authController.password.text;
+              String email = authController.Lemail.text;
+              String password = authController.Lpassword.text;
               authController.login(email, password);
             },
             child: buttonApp(label: "Login"),
@@ -142,11 +142,11 @@ class LoginScreen extends StatelessWidget {
         children: [
           SizedBox(height: 35),
           TextFieldLable(labelText: "Username"),
-          TextFormFieldReuse(controller: authController.username),
+          TextFormFieldReuse(controller: authController.Rusername),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Email address"),
           TextFormFieldReuse(
-            controller: authController.email,
+            controller: authController.Remail,
           ),
           SizedBox(height: 20),
           TextFieldLable(
@@ -154,15 +154,16 @@ class LoginScreen extends StatelessWidget {
           ),
           TextFormFieldReuse(
             icons: Icons.visibility_off_outlined,
+            controller: authController.Rpassword,
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Alreay have an account?"),
           Spacer(),
           InkWell(
             onTap: () {
-              String username = authController.username.text;
-              String email = authController.email.text;
-              String password = authController.password.text;
+              String username = authController.Rpassword.text;
+              String email = authController.Remail.text;
+              String password = authController.Rpassword.text;
               authController.register(username, email, password);
             },
             child: buttonApp(label: "Sign Up"),

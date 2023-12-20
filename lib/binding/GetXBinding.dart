@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class DeliveryBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(SplashController());
     Get.put(AuthController());
+    Get.put(SplashController());
   }
 }

@@ -8,9 +8,11 @@ class AuthController extends GetxController {
   RxBool isLogin = false.obs;
   Rx<User> user = User(email: "", password: "").obs;
 
-  final email = TextEditingController();
-  final password = TextEditingController();
-  final username = TextEditingController();
+  final Remail = TextEditingController();
+  final Rpassword = TextEditingController();
+  final Rusername = TextEditingController();
+  final Lemail = TextEditingController();
+  final Lpassword = TextEditingController();
 
   void register(String username, String email, String password) async {
     isLogin(true);

@@ -6,9 +6,10 @@ import 'package:get/get.dart';
 class SplashController extends GetxController {
   void intiSplashScreen() async {
     AuthController authController = Get.find();
+
     Future.delayed(
       Duration(seconds: 3),
-      () => authController.isLogin.value
+      () => authController.isLogin()
           ? Get.offAll(() => HomeScreen())
           : Get.offAll(() => LoginScreen()),
     );

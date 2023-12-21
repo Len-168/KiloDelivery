@@ -1,10 +1,13 @@
 import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/controller/auth_Controller.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  AuthController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -153,10 +156,15 @@ class HomeScreen extends StatelessWidget {
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 30),
-        child: Icon(
-          Icons.menu_rounded,
-          color: Colors.black,
-          size: 30,
+        child: InkWell(
+          onTap: () {
+            _controller.logout();
+          },
+          child: Icon(
+            Icons.menu_rounded,
+            color: Colors.black,
+            size: 30,
+          ),
         ),
       ),
       actions: [

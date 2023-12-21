@@ -105,9 +105,11 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 40, right: 40),
       child: ListView(
         children: [
-          SizedBox(height: 35),
+          SizedBox(height: 30),
           TextFieldLable(labelText: "Email address"),
-          TextFormFieldReuse(controller: authController.Lemail),
+          TextFormFieldReuse(
+            controller: authController.Lemail,
+          ),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Password"),
           TextFormFieldReuse(
@@ -136,9 +138,11 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.only(left: 40, right: 40),
       child: ListView(
         children: [
-          SizedBox(height: 35),
+          SizedBox(height: 30),
           TextFieldLable(labelText: "Username"),
-          TextFormFieldReuse(controller: authController.Rusername),
+          TextFormFieldReuse(
+            controller: authController.Rusername,
+          ),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Email address"),
           TextFormFieldReuse(
@@ -157,9 +161,9 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 25),
           InkWell(
             onTap: () {
-              String username = authController.Rpassword.text;
-              String email = authController.Remail.text;
-              String password = authController.Rpassword.text;
+              String username = authController.Rpassword.text.trim();
+              String email = authController.Remail.text.trim();
+              String password = authController.Rpassword.text.trim();
               authController.register(username, email, password);
             },
             child: buttonApp(label: "Sign Up"),

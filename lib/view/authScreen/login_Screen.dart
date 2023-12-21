@@ -15,22 +15,22 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xfff2f2f2),
-      body: _buildBody(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Color(0xfff2f2f2),
+        body: _buildBody(),
+      ),
     );
   }
 
   Widget _buildBody() {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: [
-          _buildTabBar(),
-          SizedBox(height: 7),
-          _buildTabBarView(),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildTabBar(),
+        SizedBox(height: 7),
+        _buildTabBarView(),
+      ],
     );
   }
 
@@ -102,10 +102,8 @@ class LoginScreen extends StatelessWidget {
   Widget _buildLoginTab() {
     return Container(
         child: Padding(
-      padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(left: 40, right: 40),
+      child: ListView(
         children: [
           SizedBox(height: 35),
           TextFieldLable(labelText: "Email address"),
@@ -118,7 +116,7 @@ class LoginScreen extends StatelessWidget {
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Forgot Password?"),
-          Spacer(),
+          SizedBox(height: 70),
           InkWell(
             onTap: () {
               String email = authController.Lemail.text;
@@ -135,10 +133,8 @@ class LoginScreen extends StatelessWidget {
   Widget _buildSignUp() {
     return Container(
         child: Padding(
-      padding: const EdgeInsets.only(left: 40, right: 40, bottom: 40),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(left: 40, right: 40),
+      child: ListView(
         children: [
           SizedBox(height: 35),
           TextFieldLable(labelText: "Username"),
@@ -158,7 +154,7 @@ class LoginScreen extends StatelessWidget {
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Alreay have an account?"),
-          Spacer(),
+          SizedBox(height: 25),
           InkWell(
             onTap: () {
               String username = authController.Rpassword.text;

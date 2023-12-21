@@ -1,4 +1,5 @@
 import 'package:delivery_app/model/auth_model.dart';
+import 'package:delivery_app/view/tabScreen/home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -25,7 +26,7 @@ class AuthController extends GetxController {
     isLogin.value = true;
     final getUser = box.read('user');
     if (email == getUser?['email'] && password == getUser?['password']) {
-      Get.offAllNamed('/home');
+      Get.offAll(() => HomeScreen());
     }
   }
 

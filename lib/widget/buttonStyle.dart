@@ -19,7 +19,7 @@ class buttonApp extends StatelessWidget {
       height: 60,
       decoration: BoxDecoration(
         color: bPrimaryColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
       ),
       child: Center(
         child: Text(

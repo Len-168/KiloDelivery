@@ -3,6 +3,7 @@ import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/data_controller.dart';
 import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
+import 'package:delivery_app/view/see_more_Screen.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,12 +59,15 @@ class _HomeScreenState extends State<HomeScreen>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            "See More",
-            style: TextStyle(
-              color: bPrimaryColor,
-              fontSize: 16,
-              fontFamily: 'Outfit',
+          InkWell(
+            onTap: () => Get.to(() => SeeMoreScreen()),
+            child: Text(
+              "See More",
+              style: TextStyle(
+                color: bPrimaryColor,
+                fontSize: 16,
+                fontFamily: 'Outfit',
+              ),
             ),
           ),
         ],

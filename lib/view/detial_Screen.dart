@@ -1,4 +1,5 @@
 import 'package:delivery_app/repository/data.dart';
+import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:delivery_app/widget/detile_Screen/reusable_detile.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class DetialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: ReuseAppBar(),
       body: _buildBody(),
     );
   }
@@ -110,31 +111,6 @@ class DetialScreen extends StatelessWidget {
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      leading: InkWell(
-        onTap: () {
-          Get.back();
-        },
-        child: Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.black,
-        ),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: Icon(
-            Icons.favorite_border,
-            color: Colors.black,
-          ),
-        )
       ],
     );
   }

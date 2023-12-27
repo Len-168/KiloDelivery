@@ -18,6 +18,7 @@ class detileSubText extends StatelessWidget {
       style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
+          fontFamily: 'Outfit',
           color: Colors.black.withOpacity(0.5)),
       maxLines: MaxLine,
     );
@@ -35,6 +36,7 @@ class detile_title extends StatelessWidget {
     return Text(
       "$text",
       style: TextStyle(
+        fontFamily: 'Outfit',
         fontWeight: FontWeight.bold,
         fontSize: 18,
       ),
@@ -53,7 +55,11 @@ class priceFood_detile extends StatelessWidget {
     return Text(
       "\$ $text",
       style: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 20, color: bPrimaryColor),
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: bPrimaryColor,
+        fontFamily: 'Outfit',
+      ),
     );
   }
 }
@@ -72,6 +78,7 @@ class nameFood_detile extends StatelessWidget {
       "$text",
       style: TextStyle(
         fontWeight: FontWeight.w600,
+        fontFamily: 'Outfit',
         fontSize: 25,
       ),
     );

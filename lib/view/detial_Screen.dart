@@ -1,11 +1,13 @@
-import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:delivery_app/widget/detile_Screen/reusable_detile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetialScreen extends StatelessWidget {
-  const DetialScreen({super.key});
+  DetialScreen({super.key, required this.data});
+
+  final ProductDetile data;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,9 @@ class DetialScreen extends StatelessWidget {
                 height: Get.height,
                 child: Container(
                   child: Center(
-                    child: Image.network(
-                        height: 200,
-                        'https://d1sag4ddilekf6.cloudfront.net/compressed_webp/items/KHITE20220915071704042993/detail/1736348b8c134f9b9ca6ad9ec1b5ab82_1663820367917320552.webp'),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset('${data.image}')),
                   ),
                 ),
               );
@@ -73,9 +75,9 @@ class DetialScreen extends StatelessWidget {
         Center(
           child: Column(
             children: [
-              nameFood_detile(text: "Veggie Tomato mix"),
+              nameFood_detile(text: "${data.title}"),
               SizedBox(height: 10),
-              priceFood_detile(text: "200"),
+              priceFood_detile(text: "${data.price}"),
             ],
           ),
         ),
@@ -89,8 +91,7 @@ class DetialScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               detileSubText(
-                text:
-                    "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
+                text: "${data.deliverInfo}",
                 MaxLine: 2,
               ),
               SizedBox(height: 30),
@@ -99,11 +100,10 @@ class DetialScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               detileSubText(
-                text:
-                    "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order Delivery time can be affected by many factors, such as the complexity of the product or service being produced, the availability of raw materials and inputs",
+                text: "${data.Policy}",
                 MaxLine: 4,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 25),
               buttonApp(
                 label: 'Add to Card',
               ),

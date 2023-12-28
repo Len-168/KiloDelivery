@@ -13,7 +13,10 @@ class DetialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReuseAppBar(),
+      appBar: ReuseAppBar(
+        leading: Icons.arrow_back_ios_new,
+        action: Icons.favorite_border,
+      ),
       body: _buildBody(),
     );
   }
@@ -34,7 +37,10 @@ class DetialScreen extends StatelessWidget {
                   child: Center(
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: Image.asset('${data.image}')),
+                        child: Image.asset(
+                          '${data.image}',
+                          fit: BoxFit.cover,
+                        )),
                   ),
                 ),
               );

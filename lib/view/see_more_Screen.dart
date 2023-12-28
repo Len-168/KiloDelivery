@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:delivery_app/constant/constant.dart';
-import 'package:delivery_app/controller/search_controller.dart';
 import 'package:delivery_app/controller/seemore_controller.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ class SeeMoreScreen extends StatelessWidget {
   SeeMoreScreen({super.key});
 
   SeemoreController _dataController = Get.find();
-  FindController _searchController = Get.find();
 
   @override
   Widget build(BuildContext context) {

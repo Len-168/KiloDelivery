@@ -209,23 +209,36 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildBoxSerach() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-      child: Container(
-        width: Get.width,
-        height: 45,
-        decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: TextField(
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            prefixIcon: Icon(
-              Icons.search_rounded,
-              color: Colors.black54,
-            ),
-            hintText: "Serach",
+    return InkWell(
+      onTap: () {
+        Get.to(() => SeeMoreScreen());
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+        child: Container(
+          width: Get.width,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.08),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Icon(
+                  Icons.search,
+                ),
+              ),
+              SizedBox(width: 15),
+              Text(
+                "Serach",
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                ),
+              )
+            ],
           ),
         ),
       ),

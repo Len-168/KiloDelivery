@@ -168,6 +168,7 @@ class _HomeScreenState extends State<HomeScreen>
                         borderRadius: BorderRadius.circular(80),
                         child: Image.asset(
                           getProduct.image.toString(),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -199,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen>
                   e.tabLabel!,
                   style: TextStyle(
                     color: bPrimaryColor,
-                    fontSize: 20,
+                    fontSize: 23,
                     fontWeight: FontWeight.w500,
                   ),
                 ))

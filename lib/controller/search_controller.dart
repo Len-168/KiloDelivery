@@ -1,16 +1,8 @@
 import 'package:delivery_app/repository/data.dart';
 import 'package:get/get.dart';
 
-class SeemoreController extends GetxController {
-  // final seemoreList = <ProductDetile>[].obs;
-
-  @override
-  void onReady() {
-    super.onReady();
-    searchByTitle("");
-  }
-
-  final serachResult = <ProductDetile>[].obs;
+class FindController extends GetxController {
+  final serachResult = [].obs;
 
   void searchByTitle(String searchText) {
     serachResult.value = lstMainData

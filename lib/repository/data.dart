@@ -16,12 +16,13 @@ class ProductDetile {
   String? Policy;
   String? image;
 
-  ProductDetile(
-      {required this.title,
-      required this.price,
-      required this.deliverInfo,
-      required this.Policy,
-      required this.image});
+  ProductDetile({
+    required this.title,
+    required this.price,
+    required this.deliverInfo,
+    required this.Policy,
+    required this.image,
+  });
 }
 
 List<MainData> lstMainData = [

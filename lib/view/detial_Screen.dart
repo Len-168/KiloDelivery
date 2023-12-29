@@ -16,12 +16,13 @@ class DetialScreen extends StatelessWidget {
       appBar: ReuseAppBar(
         leading: Icons.arrow_back_ios_new,
         action: Icons.favorite_border,
+        title: "",
       ),
       body: _buildBody(),
     );
   }
 
-  Column _buildBody() {
+  Widget _buildBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -113,6 +114,8 @@ class DetialScreen extends StatelessWidget {
               SizedBox(height: 25),
               buttonApp(
                 label: 'Add to Card',
+                Left: 0,
+                Right: 0,
               ),
             ],
           ),

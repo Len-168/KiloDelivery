@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:delivery_app/controller/auth_Controller.dart';
 import 'package:delivery_app/view/authScreen/login_Screen.dart';
-import 'package:delivery_app/view/tabScreen/home_Screen.dart';
+import 'package:delivery_app/view/bottom_navigation.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -14,7 +14,7 @@ class SplashController extends GetxController {
     _timer = Timer(
       Duration(seconds: 3),
       () => authController.isLogin()
-          ? Get.offAll(() => HomeScreen())
+          ? Get.offAll(() => NavigationScreen())
           : Get.offAll(() => LoginScreen()),
     );
   }

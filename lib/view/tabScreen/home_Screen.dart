@@ -4,6 +4,7 @@ import 'package:delivery_app/controller/data_controller.dart';
 import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
 import 'package:delivery_app/view/see_more_Screen.dart';
+import 'package:delivery_app/view/tabScreen/cart_screen.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Padding _buildSeeMore() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 30, bottom: 5),
+      padding: const EdgeInsets.only(top: 25, right: 30, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -191,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen>
         splashFactory: NoSplash.splashFactory,
         indicatorSize: TabBarIndicatorSize.label,
         indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(width: 4, color: bPrimaryColor),
+          borderSide: BorderSide(width: 3, color: bPrimaryColor),
           // insets: EdgeInsets.symmetric(horizontal: 55.0),
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
@@ -200,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen>
                   e.tabLabel!,
                   style: TextStyle(
                     color: bPrimaryColor,
-                    fontSize: 23,
+                    fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
                 ))
@@ -215,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen>
         Get.to(() => SeeMoreScreen());
       },
       child: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+        padding: const EdgeInsets.only(left: 20, right: 30, bottom: 20),
         child: Container(
           width: Get.width,
           height: 50,
@@ -274,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen>
         padding: const EdgeInsets.only(left: 30),
         child: InkWell(
           onTap: () {
-            // _controller.logout();
+            //
           },
           child: Icon(
             Icons.menu_rounded,
@@ -286,10 +287,15 @@ class _HomeScreenState extends State<HomeScreen>
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 30),
-          child: Icon(
-            Icons.shopping_cart_outlined,
-            color: Colors.black54,
-            size: 30,
+          child: InkWell(
+            onTap: () {
+              Get.to(() => CartScreen());
+            },
+            child: Icon(
+              Icons.shopping_cart_outlined,
+              color: Colors.black54,
+              size: 30,
+            ),
           ),
         )
       ],

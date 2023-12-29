@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const bPrimaryColor = Color(0xffFA4A0C);
-
+const bAppColor = Color(0xfff2f2f2);
 const splashLogo = "assets/appIcon/Bella.png";
 const splashText = "assets/appIcon/TextLogo.png";
 const splashBoy = "assets/appIcon/boyFace.png";

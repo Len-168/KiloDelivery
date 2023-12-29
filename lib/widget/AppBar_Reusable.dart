@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 AppBar ReuseAppBar({
   IconData? leading,
   IconData? action,
+  String? title,
 }) {
   return AppBar(
     backgroundColor: Colors.transparent,
@@ -15,6 +16,14 @@ AppBar ReuseAppBar({
       child: Icon(
         leading,
         color: Colors.black,
+      ),
+    ),
+    centerTitle: true,
+    title: Text(
+      title.toString(),
+      style: TextStyle(
+        color: Colors.black,
+        fontFamily: '',
       ),
     ),
     actions: [

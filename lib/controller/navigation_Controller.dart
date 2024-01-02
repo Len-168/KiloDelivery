@@ -1,4 +1,5 @@
 import 'package:delivery_app/view/tabScreen/cart_screen.dart';
+import 'package:delivery_app/view/tabScreen/fav_screen.dart';
 import 'package:delivery_app/view/tabScreen/home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,7 @@ class NavigationController extends GetxController {
 
   var lstScreen = [
     HomeScreen(),
-    Container(color: Colors.pink),
+    FavScreen(),
     CartScreen(),
     Container(color: Colors.pink),
     Container(color: Colors.black),

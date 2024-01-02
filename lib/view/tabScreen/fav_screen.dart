@@ -4,25 +4,23 @@ import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/controller/fav_controller.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
-import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
-class CartScreen extends StatefulWidget {
-  CartScreen({super.key});
+class FavScreen extends StatefulWidget {
+  FavScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<FavScreen> createState() => _FavScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _FavScreenState extends State<FavScreen> {
+  late FavController _controller = Get.find();
   late CartController _cartController = Get.find();
-  late FavController _favController = Get.find();
-
   void initState() {
-    _cartController.getProduct();
     super.initState();
+    _controller.getProductFavItem();
   }
 
   @override
@@ -31,26 +29,9 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: bAppColor,
       appBar: ReuseAppBar(
         leading: Icons.arrow_back_ios_new,
-        title: "Cart",
+        title: "Favorite",
       ),
-      floatingActionButton: buttonApp(
-        label: 'Complect Order',
-        Right: 30,
-        Left: 30,
-      ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await Future.delayed(Duration(seconds: 1));
-        _cartController.productDetails;
-      },
-      child: ListView(
+      body: ListView(
         children: [
           _buildGuySwipe(),
           _buildListCart(),
@@ -64,9 +45,9 @@ class _CartScreenState extends State<CartScreen> {
       () => ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: _cartController.productDetails.length,
+        itemCount: _controller.productDetails.length,
         itemBuilder: (context, index) {
-          final CartData = _cartController.productDetails[index];
+          final FavData = _controller.productDetails[index];
           return Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Slidable(
@@ -78,10 +59,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     SlidableAction(
                       onPressed: (context) {
-                        _favController.SaveFavItem(CartData);
+                        _cartController.Save(FavData);
                       },
                       backgroundColor: Colors.green,
-                      icon: Icons.favorite_border_outlined,
+                      icon: Icons.shopping_cart_outlined,
+                      spacing: 12,
                       autoClose: true,
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -90,7 +72,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     SlidableAction(
                       onPressed: (context) {
-                        _cartController.deleteCart(CartData);
+                        _controller.deleteFavItem(FavData);
                       },
                       backgroundColor: Colors.red,
                       icon: Icons.delete,
@@ -121,7 +103,7 @@ class _CartScreenState extends State<CartScreen> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(40),
                               child: Image.asset(
-                                '${CartData.image}',
+                                '${FavData.image}',
                                 height: 80,
                                 fit: BoxFit.cover,
                               ),
@@ -135,7 +117,7 @@ class _CartScreenState extends State<CartScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "${CartData.title}",
+                              "${FavData.title}",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20,
@@ -147,7 +129,7 @@ class _CartScreenState extends State<CartScreen> {
                             Row(
                               children: [
                                 Text(
-                                  "\$ ${CartData.price}",
+                                  "\$ ${FavData.price}",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15,

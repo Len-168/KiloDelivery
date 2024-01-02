@@ -18,19 +18,32 @@ class DetialScreen extends StatefulWidget {
 class _DetialScreenState extends State<DetialScreen> {
   final CartController _cartController = Get.find();
 
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      _cartController.initData(widget.data);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ReuseAppBar(
-        leading: Icons.arrow_back_ios_new,
-        action: Icons.favorite_border,
-        title: "",
+    return GetBuilder<CartController>(
+      builder: (controller) => Scaffold(
+        appBar: ReuseAppBar(
+          leading: Icons.arrow_back_ios_new,
+          action:
+              controller.favIconState ? Icons.favorite : Icons.favorite_border,
+          CallBack: () {
+            controller.saveFavItem(widget.data);
+          },
+          title: "",
+        ),
+        body: _buildBody(controller),
       ),
-      body: _buildBody(),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(CartController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

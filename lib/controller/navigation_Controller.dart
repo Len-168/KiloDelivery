@@ -8,6 +8,7 @@ class NavigationController extends GetxController {
 
   var lstScreen = [
     HomeScreen(),
+    Container(color: Colors.pink),
     CartScreen(),
     Container(color: Colors.pink),
     Container(color: Colors.black),
@@ -15,6 +16,5 @@ class NavigationController extends GetxController {
 
   void pageChange(int index) {
     currentIndex.value = index;
-    print("===================${index}");
   }
 }

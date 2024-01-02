@@ -1,6 +1,6 @@
 import 'package:delivery_app/model/auth_model.dart';
 import 'package:delivery_app/view/authScreen/login_Screen.dart';
-import 'package:delivery_app/view/tabScreen/home_Screen.dart';
+import 'package:delivery_app/view/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,7 +31,7 @@ class AuthController extends GetxController {
     } else {
       final getUser = box.read('user');
       if (email == getUser?['email'] && password == getUser?['password']) {
-        Get.offAll(() => HomeScreen());
+        Get.offAll(() => NavigationScreen());
         box.write('isLogin', true);
       } else {
         Get.snackbar("Error", "No Account");

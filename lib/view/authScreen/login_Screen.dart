@@ -125,7 +125,11 @@ class LoginScreen extends StatelessWidget {
               String password = authController.Lpassword.text;
               authController.login(email, password);
             },
-            child: buttonApp(label: "Login"),
+            child: buttonApp(
+              label: "Login",
+              Left: 0,
+              Right: 0,
+            ),
           ),
         ],
       ),
@@ -166,7 +170,7 @@ class LoginScreen extends StatelessWidget {
               String password = authController.Rpassword.text.trim();
               authController.register(username, email, password);
             },
-            child: buttonApp(label: "Sign Up"),
+            child: buttonApp(label: "Sign Up", Left: 0, Right: 0),
           ),
         ],
       ),

@@ -1,14 +1,3 @@
-class MainData {
-  String? type;
-  String? tabLabel;
-  List<ProductDetile> productDetile;
-  MainData({
-    required this.type,
-    required this.tabLabel,
-    required this.productDetile,
-  });
-}
-
 class ProductDetile {
   String? title;
   double? price;
@@ -22,6 +11,38 @@ class ProductDetile {
     required this.deliverInfo,
     required this.Policy,
     required this.image,
+  });
+
+  factory ProductDetile.fromJson(Map<String, dynamic> json) {
+    return ProductDetile(
+      title: json["title"],
+      price: json["price"],
+      deliverInfo: json['v'],
+      Policy: json['Policy'],
+      image: json['image'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'price': price,
+      'deliverInfo': deliverInfo,
+      'Policy': Policy,
+      'image': image,
+    };
+  }
+}
+
+class MainData {
+  String? type;
+  String? tabLabel;
+  List<ProductDetile> productDetile;
+
+  MainData({
+    required this.type,
+    required this.tabLabel,
+    required this.productDetile,
   });
 }
 

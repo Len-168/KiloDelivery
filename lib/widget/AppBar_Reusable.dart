@@ -1,3 +1,4 @@
+import 'package:delivery_app/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,7 @@ AppBar ReuseAppBar({
   IconData? leading,
   IconData? action,
   String? title,
+  VoidCallback? CallBack,
 }) {
   return AppBar(
     backgroundColor: Colors.transparent,
@@ -15,7 +17,8 @@ AppBar ReuseAppBar({
       },
       child: Icon(
         leading,
-        color: Colors.black,
+        color: bPrimaryColor,
+        size: 25,
       ),
     ),
     centerTitle: true,
@@ -29,9 +32,12 @@ AppBar ReuseAppBar({
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: 20),
-        child: Icon(
-          action,
-          color: Colors.black,
+        child: InkWell(
+          onTap: CallBack,
+          child: Icon(
+            action,
+            color: bPrimaryColor,
+          ),
         ),
       )
     ],

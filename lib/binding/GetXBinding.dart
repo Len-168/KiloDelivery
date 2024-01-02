@@ -1,6 +1,7 @@
 import 'package:delivery_app/controller/auth_Controller.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/controller/data_controller.dart';
+import 'package:delivery_app/controller/fav_controller.dart';
 import 'package:delivery_app/controller/navigation_Controller.dart';
 import 'package:delivery_app/controller/seemore_controller.dart';
 import 'package:delivery_app/controller/splash_Controller.dart';
@@ -15,5 +16,6 @@ class DeliveryBinding extends Bindings {
     Get.put(SeemoreController());
     Get.put(NavigationController());
     Get.put(CartController());
+    Get.put(FavController());
   }
 }

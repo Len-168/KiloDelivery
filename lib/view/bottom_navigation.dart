@@ -14,45 +14,55 @@ class NavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() => _controller.lstScreen[_controller.currentIndex.value]),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xfff2f2f2),
-        elevation: 0,
-        currentIndex: _controller.currentIndex.value,
-        onTap: (index) {
-          _controller.pageChange(index);
-        },
-        selectedItemColor: bPrimaryColor,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 38,
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          backgroundColor: Color(0xfff2f2f2),
+          elevation: 0,
+          currentIndex: _controller.currentIndex.value,
+          onTap: (index) {
+            _controller.pageChange(index);
+          },
+          selectedItemColor: bPrimaryColor,
+          unselectedItemColor: Colors.grey,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                size: 30,
+              ),
+              label: "",
             ),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite_border,
-              size: 35,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.favorite_border,
+                size: 30,
+              ),
+              label: "",
             ),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline_outlined,
-              size: 35,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+                size: 30,
+              ),
+              label: "",
             ),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.history,
-              size: 35,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history,
+                size: 30,
+              ),
+              label: "",
             ),
-            label: "",
-          ),
-        ],
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_outline_outlined,
+                size: 30,
+              ),
+              label: "",
+            ),
+          ],
+        ),
       ),
     );
   }

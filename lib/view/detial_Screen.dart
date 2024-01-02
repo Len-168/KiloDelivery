@@ -1,3 +1,4 @@
+import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:delivery_app/widget/buttonStyle.dart';
@@ -5,10 +6,17 @@ import 'package:delivery_app/widget/detile_Screen/reusable_detile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DetialScreen extends StatelessWidget {
+class DetialScreen extends StatefulWidget {
   DetialScreen({super.key, required this.data});
 
   final ProductDetile data;
+
+  @override
+  State<DetialScreen> createState() => _DetialScreenState();
+}
+
+class _DetialScreenState extends State<DetialScreen> {
+  final CartController _cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,7 @@ class DetialScreen extends StatelessWidget {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
-                          '${data.image}',
+                          '${widget.data.image}',
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -83,9 +91,9 @@ class DetialScreen extends StatelessWidget {
         Center(
           child: Column(
             children: [
-              nameFood_detile(text: "${data.title}"),
+              nameFood_detile(text: "${widget.data.title}"),
               SizedBox(height: 10),
-              priceFood_detile(text: "${data.price}"),
+              priceFood_detile(text: "${widget.data.price}"),
             ],
           ),
         ),
@@ -99,7 +107,7 @@ class DetialScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               detileSubText(
-                text: "${data.deliverInfo}",
+                text: "${widget.data.deliverInfo}",
                 MaxLine: 2,
               ),
               SizedBox(height: 30),
@@ -108,14 +116,19 @@ class DetialScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               detileSubText(
-                text: "${data.Policy}",
+                text: "${widget.data.Policy}",
                 MaxLine: 4,
               ),
               SizedBox(height: 25),
-              buttonApp(
-                label: 'Add to Card',
-                Left: 0,
-                Right: 0,
+              InkWell(
+                onTap: () {
+                  _cartController.Save(widget.data);
+                },
+                child: buttonApp(
+                  label: 'Add to Card',
+                  Left: 0,
+                  Right: 0,
+                ),
               ),
             ],
           ),

@@ -22,7 +22,6 @@ class DataController extends GetxController {
   void filterByTabIndex(int index) {
     final list = lstMainData.firstWhere(
         (element) => element.tabLabel == lstMainData[index].tabLabel);
-    debugPrint("=========== $list");
     homeList(list.productDetile);
   }
 }

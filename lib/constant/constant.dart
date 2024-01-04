@@ -10,3 +10,5 @@ const splashGirl = "assets/appIcon/Facegril.png";
 const IconsMenu = "assets/appIcon/Vector.png";
 
 const SerachIcons = "assets/appIcon/search.png";
+
+const history_key = "HistoryItems";

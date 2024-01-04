@@ -17,7 +17,7 @@ class ProductDetile {
     return ProductDetile(
       title: json["title"],
       price: json["price"],
-      deliverInfo: json['v'],
+      deliverInfo: json['deliverInfo'],
       Policy: json['Policy'],
       image: json['image'],
     );
@@ -334,7 +334,7 @@ List<MainData> lstMainData = [
     tabLabel: "Snacks",
     productDetile: [
       ProductDetile(
-        title: "Salted peanuts",
+        title: "Tomato sauce",
         price: 10.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -343,7 +343,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/1.png",
       ),
       ProductDetile(
-        title: "Pretzels",
+        title: "Hollandaise",
         price: 13.5,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -352,7 +352,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/2.png",
       ),
       ProductDetile(
-        title: "Potato chips",
+        title: "Alfredo sauce",
         price: 9.8,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -361,7 +361,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/3.png",
       ),
       ProductDetile(
-        title: "Banana Chips",
+        title: "Hot Sauce",
         price: 25.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -370,7 +370,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/4.png",
       ),
       ProductDetile(
-        title: "Apple chips",
+        title: "Soy sauce",
         price: 12.5,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -379,7 +379,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/5.png",
       ),
       ProductDetile(
-        title: "Pork rinds",
+        title: "Béchamel",
         price: 9.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -388,7 +388,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/6.png",
       ),
       ProductDetile(
-        title: "Pretzels",
+        title: "Caramel",
         price: 1.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -397,7 +397,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/7.png",
       ),
       ProductDetile(
-        title: "Cheese dips",
+        title: "Chimichurri",
         price: 5.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -406,7 +406,7 @@ List<MainData> lstMainData = [
         image: "assets/image/snacks/8.png",
       ),
       ProductDetile(
-        title: "Mixed nuts",
+        title: "Chutney",
         price: 5.1,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -430,7 +430,7 @@ List<MainData> lstMainData = [
     tabLabel: "Sauce",
     productDetile: [
       ProductDetile(
-        title: "Salted peanuts",
+        title: "Avgolemono",
         price: 10.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -439,7 +439,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/1.png",
       ),
       ProductDetile(
-        title: "Pretzels",
+        title: "Wine sauce",
         price: 13.5,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -448,7 +448,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/2.png",
       ),
       ProductDetile(
-        title: "Potato chips",
+        title: "Vinaigrette",
         price: 9.8,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -457,7 +457,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/3.png",
       ),
       ProductDetile(
-        title: "Banana Chips",
+        title: "Steak sauce",
         price: 25.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -466,7 +466,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/4.png",
       ),
       ProductDetile(
-        title: "Apple chips",
+        title: "Sauce aurore",
         price: 12.5,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -475,7 +475,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/5.png",
       ),
       ProductDetile(
-        title: "Pork rinds",
+        title: "Ravigote sauce",
         price: 9.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -484,7 +484,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/6.png",
       ),
       ProductDetile(
-        title: "Pretzels",
+        title: "Hot sauces",
         price: 1.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -493,7 +493,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/7.png",
       ),
       ProductDetile(
-        title: "Cheese dips",
+        title: "Green sauces",
         price: 5.0,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -502,7 +502,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/8.png",
       ),
       ProductDetile(
-        title: "Mixed nuts",
+        title: "Fish sauces",
         price: 5.1,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",
@@ -511,7 +511,7 @@ List<MainData> lstMainData = [
         image: "assets/image/sauce/9.png",
       ),
       ProductDetile(
-        title: "Popcorn",
+        title: "Emulsified sauces",
         price: 25,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",

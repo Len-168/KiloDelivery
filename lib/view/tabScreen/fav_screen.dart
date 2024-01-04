@@ -2,7 +2,6 @@
 
 import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
-import 'package:delivery_app/controller/fav_controller.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -16,11 +15,11 @@ class FavScreen extends StatefulWidget {
 }
 
 class _FavScreenState extends State<FavScreen> {
-  late FavController _controller = Get.find();
   late CartController _cartController = Get.find();
+
   void initState() {
+    _cartController.getProductFavItem();
     super.initState();
-    _controller.getProductFavItem();
   }
 
   @override
@@ -45,9 +44,9 @@ class _FavScreenState extends State<FavScreen> {
       () => ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: _controller.productDetails.length,
+        itemCount: _cartController.lstFavItems.length,
         itemBuilder: (context, index) {
-          final FavData = _controller.productDetails[index];
+          final FavData = _cartController.lstFavItems[index];
           return Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Slidable(
@@ -72,7 +71,7 @@ class _FavScreenState extends State<FavScreen> {
                     ),
                     SlidableAction(
                       onPressed: (context) {
-                        _controller.deleteFavItem(FavData);
+                        _cartController.deleteFavItem(FavData);
                       },
                       backgroundColor: Colors.red,
                       icon: Icons.delete,

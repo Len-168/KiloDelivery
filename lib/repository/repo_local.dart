@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/model/history_order.dart';
 import 'package:delivery_app/repository/data.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductStorage {
@@ -34,5 +37,33 @@ class ProductStorage {
     final items = pref.getStringList(storeKy);
     return items?.map((e) => ProductDetile.fromJson(jsonDecode(e))).toList() ??
         [];
+  }
+
+  Future<bool> removeAllByKey({required String key}) async {
+    final pref = await _getSharePreference();
+    return pref.remove(key);
+  }
+
+// repo history
+
+  Future<List<HistoryOrder>> getAllHistoryOrder() async {
+    final pref = await _getSharePreference();
+    final items = pref.getStringList(history_key);
+    debugPrint(items.toString());
+    return items?.map((e) => HistoryOrder.fromJson(jsonDecode(e))).toList() ??
+        [];
+  }
+
+  Future<bool> putHistoryOrders(List<HistoryOrder> historyOrders) async {
+    final pref = await _getSharePreference();
+    List<String> items =
+        historyOrders.map((e) => jsonEncode(e.toMap())).toList();
+    return pref.setStringList(history_key, items);
+  }
+
+  Future<bool> putHistory(HistoryOrder order) async {
+    final historyOrders = await getAllHistoryOrder();
+    historyOrders.add(order);
+    return putHistoryOrders(historyOrders);
   }
 }

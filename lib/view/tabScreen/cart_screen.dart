@@ -2,7 +2,7 @@
 
 import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
-import 'package:delivery_app/controller/fav_controller.dart';
+import 'package:delivery_app/model/history_order.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +18,9 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late CartController _cartController = Get.find();
-  late FavController _favController = Get.find();
 
   void initState() {
-    _cartController.getProduct();
+    _cartController.getProductCart();
     super.initState();
   }
 
@@ -31,12 +30,17 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: bAppColor,
       appBar: ReuseAppBar(
         leading: Icons.arrow_back_ios_new,
-        title: "Cart",
+        title: "Order",
       ),
-      floatingActionButton: buttonApp(
-        label: 'Complect Order',
-        Right: 30,
-        Left: 30,
+      floatingActionButton: InkWell(
+        onTap: () {
+          _showBottomSheet(context, _cartController.getCheckOutOrder());
+        },
+        child: buttonApp(
+          label: 'Check out',
+          Right: 30,
+          Left: 30,
+        ),
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
@@ -78,7 +82,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     SlidableAction(
                       onPressed: (context) {
-                        _favController.SaveFavItem(CartData);
+                        _cartController.saveFavItem(CartData);
                       },
                       backgroundColor: Colors.green,
                       icon: Icons.favorite_border_outlined,
@@ -211,6 +215,137 @@ class _CartScreenState extends State<CartScreen> {
           );
         },
       ),
+    );
+  }
+
+  Future<dynamic> _showBottomSheet(BuildContext context, HistoryOrder order) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          width: Get.width,
+          height: Get.height,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 5),
+                    width: 50,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: bPrimaryColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Order Confirmation",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  height: 70,
+                  color: Colors.amber,
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  height: 70,
+                  color: Colors.amber,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  "Delivery Address",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.location_on_outlined),
+                        Text(
+                          "New York,Prey Veng, Cambo...",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Icon(Icons.edit),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Delivery time :",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Text(
+                          "Total :",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "15-30 Min",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          "\$ ${order.totalAmount}",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 25),
+                InkWell(
+                  onTap: () {
+                    _cartController.prepareForOrder(order);
+                  },
+                  child: buttonApp(
+                    label: 'Confirm Order',
+                    Left: 0,
+                    Right: 0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

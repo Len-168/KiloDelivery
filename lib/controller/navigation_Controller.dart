@@ -1,5 +1,6 @@
 import 'package:delivery_app/view/tabScreen/cart_screen.dart';
 import 'package:delivery_app/view/tabScreen/fav_screen.dart';
+import 'package:delivery_app/view/tabScreen/history_screen.dart';
 import 'package:delivery_app/view/tabScreen/home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class NavigationController extends GetxController {
     HomeScreen(),
     FavScreen(),
     CartScreen(),
-    Container(color: Colors.pink),
+    HistoryScreen(),
     Container(color: Colors.black),
   ];
 

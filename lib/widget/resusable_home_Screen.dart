@@ -19,7 +19,7 @@ class TextLogoSerach extends StatelessWidget {
           color: Colors.black,
           fontSize: width,
           fontWeight: FontWeight.bold,
-          fontFamily: 'ConcertOne'),
+          fontFamily: 'AsapCondensed'),
     );
   }
 }

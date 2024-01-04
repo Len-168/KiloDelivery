@@ -20,7 +20,10 @@ class SeeMoreScreen extends StatelessWidget {
         elevation: 0,
         leading: InkWell(
           onTap: () {
-            Get.back();
+            FocusScope.of(context).unfocus();
+            Future.delayed(Duration(milliseconds: 250), () {
+              Get.back();
+            });
           },
           child: Icon(
             Icons.arrow_back_ios_new,
@@ -106,11 +109,14 @@ class SeeMoreScreen extends StatelessWidget {
           final _getProduct = _dataController.serachResult[index];
           return InkWell(
             onTap: () {
-              Get.to(
-                () => DetialScreen(
-                  data: _dataController.serachResult[index],
-                ),
-              );
+              FocusScope.of(context).unfocus();
+              Future.delayed(Duration(milliseconds: 250), () {
+                Get.to(
+                  () => DetialScreen(
+                    data: _dataController.serachResult[index],
+                  ),
+                );
+              });
             },
             child: Container(
               margin: EdgeInsets.only(

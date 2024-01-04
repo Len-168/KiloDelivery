@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/controller/data_controller.dart';
 import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
 import 'package:delivery_app/view/see_more_Screen.dart';
-import 'package:delivery_app/view/tabScreen/cart_screen.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,9 +17,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 DataController _dataController = Get.find();
+CartController _controller = Get.find();
 
 class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
   void initState() {
     super.initState();
     _dataController.tabcontroller =
@@ -31,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return DefaultTabController(
       length: lstMainData.length,
       child: Scaffold(
@@ -211,12 +217,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildBoxSerach() {
-    return InkWell(
-      onTap: () {
-        Get.to(() => SeeMoreScreen());
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 30, bottom: 20),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 30, bottom: 20),
+      child: InkWell(
+        onTap: () {
+          Get.to(() => SeeMoreScreen());
+        },
         child: Container(
           width: Get.width,
           height: 50,
@@ -249,18 +255,18 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildLogoHomeScreen() {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 35, top: 20),
+      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 35, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextLogoSerach(
             mainText: "Delicious",
-            width: 35,
+            width: 50,
           ),
           SizedBox(height: 10),
           TextLogoSerach(
             mainText: "food for you",
-            width: 35,
+            width: 45,
           )
         ],
       ),
@@ -273,30 +279,43 @@ class _HomeScreenState extends State<HomeScreen>
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 30),
-        child: InkWell(
-          onTap: () {
-            //
-          },
-          child: Icon(
-            Icons.menu_rounded,
-            color: Colors.black,
-            size: 30,
-          ),
+        child: Icon(
+          Icons.menu_rounded,
+          color: Colors.black,
+          size: 30,
         ),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 30),
-          child: InkWell(
-            onTap: () {
-              Get.to(() => CartScreen());
-            },
-            child: Icon(
-              Icons.shopping_cart_outlined,
-              color: Colors.black54,
-              size: 30,
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20, top: 13),
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                color: Colors.black54,
+                size: 30,
+              ),
             ),
-          ),
+            Positioned(
+              right: 0,
+              left: 0,
+              top: 11,
+              child: CircleAvatar(
+                radius: 9,
+                backgroundColor: Colors.red,
+                child: Obx(
+                  () => Text(
+                    "${_controller.totalOrderQty}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         )
       ],
     );

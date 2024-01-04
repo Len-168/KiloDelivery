@@ -13,7 +13,7 @@ class CartController extends GetxController {
   var favIconState = false;
 
   final orderHistorys = <HistoryOrder>[].obs;
-  final totalOrderAmount = 0.0.obs;
+  var totalOrderQty = 0.obs;
 
 //
 //
@@ -26,6 +26,7 @@ class CartController extends GetxController {
     final isSave =
         await productStorage.putProductDetail(productDetile, "ProductItems");
     if (isSave) {
+      calculateTotal();
       print("=============================Save");
     }
   }
@@ -33,6 +34,7 @@ class CartController extends GetxController {
   void getProductCart() async {
     final imageDetails = await productStorage.getProductItems("ProductItems");
     productDetails.value = imageDetails;
+
     print("------------Get-Cart------------");
   }
 
@@ -106,19 +108,12 @@ class CartController extends GetxController {
 //
 //
 //
-  void saveHistory(HistoryOrder historyOrder) async {
-    final isSave = await productStorage.putHistory(historyOrder);
-    if (isSave) {
-      print("=============================Save");
-    }
+
+  void calculateTotal() async {
+    final allProducts = await productStorage.getProductItems("ProductItems");
+    totalOrderQty.value = allProducts.length;
   }
 
-//
-//
-//   asasd Controller
-//
-//
-//
   HistoryOrder getCheckOutOrder() {
     var totalAty = productDetails.length;
     double totalAmount = 0.0;
@@ -137,6 +132,7 @@ class CartController extends GetxController {
     await productStorage.removeAllByKey(key: "ProductItems");
     productDetails.clear();
     getOrderHistory();
+    calculateTotal();
   }
 
   void getOrderHistory() async {

@@ -89,9 +89,9 @@ flutter:
       fonts:
         - asset: assets\fonts\Outfit-Bold.ttf
 
-    # - family: Jost
-    #   fonts:
-    #     - asset:  assets/fonts/Poppins-Bold.ttf
+    - family: AsapCondensed
+      fonts:
+        - asset: assets/fonts/AsapCondensed-Bold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

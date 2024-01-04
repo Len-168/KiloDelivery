@@ -23,6 +23,7 @@ class HistoryScreen extends StatelessWidget {
               itemCount: _controller.orderHistorys.length,
               itemBuilder: (context, index) {
                 final order = _controller.orderHistorys[index];
+
                 return Padding(
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -42,29 +43,34 @@ class HistoryScreen extends StatelessWidget {
                     // child: Text(order.orderDate),
                     child: Center(
                       child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          child: Icon(Icons.person),
-                        ),
-                        title: Text(
-                          'Len',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.blueAccent,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          'order from Kilo Delivery',
-                        ),
-                        trailing: Text(
-                          "- \$${order.totalAmount.toString()}",
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+                          leading: CircleAvatar(
+                            radius: 30,
+                            child: Icon(Icons.person),
                           ),
-                        ),
-                      ),
+                          title: Text(
+                            'Len',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            'Kilo Delivery',
+                          ),
+                          trailing: Column(
+                            children: [
+                              Text(
+                                "- \$${order.totalAmount.toString()}",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              // Text(order.orderDate),
+                              // Text(YYYY_MM_DD.toString()),
+                            ],
+                          )),
                     ),
                   ),
                 );

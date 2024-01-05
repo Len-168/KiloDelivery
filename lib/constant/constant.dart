@@ -10,5 +10,9 @@ const splashGirl = "assets/appIcon/Facegril.png";
 const IconsMenu = "assets/appIcon/Vector.png";
 
 const SerachIcons = "assets/appIcon/search.png";
-
+const paypal = "assets/appIcon/paypal.png";
+const card = "assets/appIcon/bank.png";
+const back = "assets/appIcon/card.png";
 const history_key = "HistoryItems";
+
+List<String> lstProfile = ["Oreders", "Pending reviews", "Faq", "Help"];

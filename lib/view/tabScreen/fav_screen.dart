@@ -50,145 +50,103 @@ class _FavScreenState extends State<FavScreen> {
           return Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Slidable(
-                endActionPane: ActionPane(
-                  motion: BehindMotion(),
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SlidableAction(
-                      onPressed: (context) {
-                        _cartController.Save(FavData);
-                      },
-                      backgroundColor: Colors.green,
-                      icon: Icons.shopping_cart_outlined,
-                      spacing: 12,
-                      autoClose: true,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SlidableAction(
-                      onPressed: (context) {
-                        _cartController.deleteFavItem(FavData);
-                      },
-                      backgroundColor: Colors.red,
-                      icon: Icons.delete,
-                      spacing: 12,
-                      autoClose: true,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+              endActionPane: ActionPane(
+                motion: BehindMotion(),
+                children: [
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
+                      _cartController.Save(FavData);
+                    },
+                    backgroundColor: Colors.green,
+                    icon: Icons.shopping_cart_outlined,
+                    spacing: 12,
+                    autoClose: true,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
+                      _cartController.deleteFavItem(FavData);
+                    },
+                    backgroundColor: Colors.red,
+                    icon: Icons.delete,
+                    spacing: 12,
+                    autoClose: true,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ],
+              ),
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      blurRadius: 2,
+                    )
                   ],
                 ),
-                child: Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        blurRadius: 2,
-                      )
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 13),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(40),
-                              child: Image.asset(
-                                '${FavData.image}',
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${FavData.title}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Outfit',
-                              ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 13),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.asset(
+                              '${FavData.image}',
+                              height: 80,
+                              fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15),
-                            Row(
-                              children: [
-                                Text(
-                                  "\$ ${FavData.price}",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Outfit',
-                                    color: bPrimaryColor,
-                                  ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${FavData.title}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Outfit',
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Text(
+                                "\$ ${FavData.price}",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Outfit',
+                                  color: bPrimaryColor,
                                 ),
-                                SizedBox(width: 100),
-                                Container(
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    color: bPrimaryColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10,
-                                      right: 10,
-                                      bottom: 5,
-                                      top: 5,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "-",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          "1",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        Text(
-                                          "+",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+                              ),
+                              SizedBox(width: 100),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),

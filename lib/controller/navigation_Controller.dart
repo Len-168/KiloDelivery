@@ -2,7 +2,7 @@ import 'package:delivery_app/view/tabScreen/cart_screen.dart';
 import 'package:delivery_app/view/tabScreen/fav_screen.dart';
 import 'package:delivery_app/view/tabScreen/history_screen.dart';
 import 'package:delivery_app/view/tabScreen/home_Screen.dart';
-import 'package:flutter/material.dart';
+import 'package:delivery_app/view/tabScreen/my_profile.dart';
 import 'package:get/get.dart';
 
 class NavigationController extends GetxController {
@@ -13,7 +13,7 @@ class NavigationController extends GetxController {
     FavScreen(),
     CartScreen(),
     HistoryScreen(),
-    Container(color: Colors.black),
+    MyProfile(),
   ];
 
   void pageChange(int index) {

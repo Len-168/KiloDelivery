@@ -2,9 +2,11 @@
 import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/controller/data_controller.dart';
+import 'package:delivery_app/model/profile_model.dart';
 import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
 import 'package:delivery_app/view/see_more_Screen.dart';
+import 'package:delivery_app/view/tabScreen/cart_screen.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen>
     _dataController.tabcontroller.addListener(() {
       _dataController.updateCurrentIndex();
     });
+    _controller.calculateTotal();
   }
 
   @override
@@ -41,8 +44,138 @@ class _HomeScreenState extends State<HomeScreen>
       length: lstMainData.length,
       child: Scaffold(
         backgroundColor: Color(0xfff2f2f2),
+        drawer: _buildDrower(context),
+        // appBar: AppBar(),
         appBar: _buildAppBar(),
+
         body: _buildBody(),
+      ),
+    );
+  }
+
+  Widget _buildDrower(BuildContext context) {
+    return Drawer(
+      backgroundColor: bPrimaryColor,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ))),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 37,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 35,
+                    backgroundImage: NetworkImage(
+                        'https://scontent.fpnh10-1.fna.fbcdn.net/v/t39.30808-6/265994151_1185635701963659_8941339380786737517_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9c7eae&_nc_eui2=AeF5_Y8LA-gibLOfF7k7sRwFkXiBZM5uupGReIFkzm66kftlMbITT5fi_eAsJgFYDWHQGDjDrLrXyv6rYxFUJEUh&_nc_ohc=446cWJ0TMkUAX8fII65&_nc_ht=scontent.fpnh10-1.fna&oh=00_AfBEvJTJLXEYbQneIuba0BaRQupx1xjAdtaRwt-zI_hSfw&oe=659BFA44'),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Siem Polen",
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "dvar4890@gmail.com",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          lineDrower(),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(top: 30),
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: lstofProfile.length,
+            itemBuilder: (context, index) {
+              final dataProfile = lstofProfile[index];
+              return Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          dataProfile.icons,
+                          size: 28,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          dataProfile.label.toString(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Outfit'),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, top: 10, bottom: 10, right: 60),
+                      child: index == lstofProfile.length - 1
+                          ? null
+                          : lineDrower(),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 30, top: 80),
+            child: Row(
+              children: [
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Sign-out",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontFamily: 'Outfit',
+                      ),
+                    )),
+                Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                )
+              ],
+            ),
+          ),
+          lineDrower(),
+        ],
       ),
     );
   }
@@ -275,25 +408,23 @@ class _HomeScreenState extends State<HomeScreen>
 
   AppBar _buildAppBar() {
     return AppBar(
+      iconTheme: IconThemeData(color: Colors.blueGrey),
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 30),
-        child: Icon(
-          Icons.menu_rounded,
-          color: Colors.black,
-          size: 30,
-        ),
-      ),
       actions: [
         Stack(
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 20, top: 13),
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.black54,
-                size: 30,
+              child: InkWell(
+                onTap: () {
+                  Get.to(() => CartScreen());
+                },
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.black54,
+                  size: 30,
+                ),
               ),
             ),
             Positioned(
@@ -318,6 +449,22 @@ class _HomeScreenState extends State<HomeScreen>
           ],
         )
       ],
+    );
+  }
+}
+
+class lineDrower extends StatelessWidget {
+  const lineDrower({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 30, right: 20, top: 5),
+      child: Divider(
+        color: Colors.white,
+      ),
     );
   }
 }

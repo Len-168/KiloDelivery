@@ -334,6 +334,7 @@ class _CartScreenState extends State<CartScreen> {
                 InkWell(
                   onTap: () {
                     _cartController.prepareForOrder(order);
+                    Navigator.pop(context);
                   },
                   child: buttonApp(
                     label: 'Confirm Order',

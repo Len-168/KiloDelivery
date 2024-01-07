@@ -1,4 +1,5 @@
 import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/view/tabScreen/profile_screen.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:delivery_app/widget/my_profile.dart';
 import 'package:delivery_app/widget/reuseProfile.dart';
@@ -28,24 +29,29 @@ class MyProfile extends StatelessWidget {
         children: [
           mainTextMtProfile(label: 'Infomation'),
           SizedBox(height: 15),
-          Container(
-            width: Get.width,
-            height: 140,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  blurRadius: 3,
-                ),
-              ],
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Row(
-              children: [
-                _buildRowPic(),
-                _buildDeite(),
-              ],
+          InkWell(
+            onTap: () {
+              Get.to(() => ProfileScreen());
+            },
+            child: Container(
+              width: Get.width,
+              height: 140,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 3,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Row(
+                children: [
+                  _buildRowPic(),
+                  _buildDeite(),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 60),

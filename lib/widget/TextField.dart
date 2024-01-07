@@ -16,6 +16,7 @@ class TextFormFieldReuse extends StatelessWidget {
   final bool? obscureText;
   final TextEditingController? controller;
   final VoidCallback? onPressedFunction;
+
   final IconData? icons;
   final FormFieldValidator<String>? validator;
 
@@ -31,7 +32,7 @@ class TextFormFieldReuse extends StatelessWidget {
       ),
       validator: validator,
       decoration: InputDecoration(
-        suffixIcon: Icon(icons),
+        suffixIcon: IconButton(onPressed: onPressedFunction, icon: Icon(icons)),
         focusColor: Colors.white,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.black),

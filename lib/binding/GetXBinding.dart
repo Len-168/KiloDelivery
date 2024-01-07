@@ -15,5 +15,6 @@ class DeliveryBinding extends Bindings {
     Get.put(SeemoreController());
     Get.put(NavigationController());
     Get.put(CartController());
+    // Get.put(HistoryOrder());
   }
 }

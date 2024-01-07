@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
-  AuthController authController = Get.find();
+  AuthController _authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,13 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildTabBarView() {
     return Expanded(
-      child: TabBarView(
-        children: [
-          _buildLoginTab(),
-          _buildSignUp(),
-        ],
+      child: Obx(
+        () => TabBarView(
+          children: [
+            _buildLoginTab(),
+            _buildSignUp(),
+          ],
+        ),
       ),
     );
   }
@@ -108,22 +110,28 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 30),
           TextFieldLable(labelText: "Email address"),
           TextFormFieldReuse(
-            controller: authController.Lemail,
+            controller: _authController.Lemail,
           ),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Password"),
           TextFormFieldReuse(
-            icons: Icons.visibility_off_outlined,
-            controller: authController.Lpassword,
+            onPressedFunction: () {
+              _authController.showHidePass();
+            },
+            icons: _authController.showPassword.value
+                ? Icons.visibility_off_outlined
+                : Icons.visibility_outlined,
+            controller: _authController.Lpassword,
+            obscureText: _authController.showPassword.value,
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Forgot Password?"),
           SizedBox(height: 70),
           InkWell(
             onTap: () {
-              String email = authController.Lemail.text;
-              String password = authController.Lpassword.text;
-              authController.login(email, password);
+              String email = _authController.Lemail.text;
+              String password = _authController.Lpassword.text;
+              _authController.login(email, password);
             },
             child: buttonApp(
               label: "Login",
@@ -145,30 +153,36 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 30),
           TextFieldLable(labelText: "Username"),
           TextFormFieldReuse(
-            controller: authController.Rusername,
+            controller: _authController.Rusername,
           ),
           SizedBox(height: 20),
           TextFieldLable(labelText: "Email address"),
           TextFormFieldReuse(
-            controller: authController.Remail,
+            controller: _authController.Remail,
           ),
           SizedBox(height: 20),
           TextFieldLable(
             labelText: "Password",
           ),
           TextFormFieldReuse(
-            icons: Icons.visibility_off_outlined,
-            controller: authController.Rpassword,
+            onPressedFunction: () {
+              _authController.showHidePass();
+            },
+            icons: _authController.showPassword.value
+                ? Icons.visibility_off_outlined
+                : Icons.visibility_outlined,
+            controller: _authController.Rpassword,
+            obscureText: _authController.showPassword.value,
           ),
           SizedBox(height: 15),
           HelperTextFiled(Label: "Alreay have an account?"),
           SizedBox(height: 25),
           InkWell(
             onTap: () {
-              String username = authController.Rpassword.text.trim();
-              String email = authController.Remail.text.trim();
-              String password = authController.Rpassword.text.trim();
-              authController.register(username, email, password);
+              String username = _authController.Rpassword.text.trim();
+              String email = _authController.Remail.text.trim();
+              String password = _authController.Rpassword.text.trim();
+              _authController.register(username, email, password);
             },
             child: buttonApp(label: "Sign Up", Left: 0, Right: 0),
           ),

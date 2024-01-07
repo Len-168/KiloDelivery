@@ -223,6 +223,7 @@ class _CartScreenState extends State<CartScreen> {
       context: context,
       builder: (BuildContext context) {
         return Container(
+          color: bAppColor,
           width: Get.width,
           height: Get.height,
           child: Padding(
@@ -250,17 +251,9 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  height: 70,
-                  color: Colors.amber,
-                ),
+                pymentcard(label: "Visa Card", card_type: visa_card),
                 SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  height: 70,
-                  color: Colors.amber,
-                ),
+                pymentcard(label: "Master Card", card_type: master_card),
                 SizedBox(height: 10),
                 Text(
                   "Delivery Address",
@@ -277,7 +270,7 @@ class _CartScreenState extends State<CartScreen> {
                       children: [
                         Icon(Icons.location_on_outlined),
                         Text(
-                          "New York,Prey Veng, Cambo...",
+                          "New York, Prey Veng, Cambo...",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -302,7 +295,7 @@ class _CartScreenState extends State<CartScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 10),
                         Text(
                           "Total :",
                           style: TextStyle(
@@ -330,7 +323,7 @@ class _CartScreenState extends State<CartScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 18),
                 InkWell(
                   onTap: () {
                     _cartController.prepareForOrder(order);
@@ -366,5 +359,57 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
     );
+  }
+}
+
+class pymentcard extends StatelessWidget {
+  pymentcard({
+    super.key,
+    required this.label,
+    required this.card_type,
+  });
+
+  String label;
+  String card_type;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: double.infinity,
+        height: 65,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 2,
+            )
+          ],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            Radio(
+              value: true,
+              groupValue: 1,
+              onChanged: (value) {},
+            ),
+            Text(
+              "$label",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Image.asset(
+                card_type,
+                height: 50,
+              ),
+            ),
+          ],
+        ));
   }
 }

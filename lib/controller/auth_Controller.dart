@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 class AuthController extends GetxController {
   final box = GetStorage();
   Rx<User> user = User(email: "", password: "").obs;
+  RxBool showPassword = true.obs;
 
   final Remail = TextEditingController();
   final Rpassword = TextEditingController();
@@ -46,5 +47,10 @@ class AuthController extends GetxController {
 
   bool isLogin() {
     return box.read('isLogin') ?? false;
+  }
+
+  void showHidePass() {
+    print("---------Click - Controller");
+    showPassword.value = !showPassword.value;
   }
 }

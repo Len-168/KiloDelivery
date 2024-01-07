@@ -26,7 +26,7 @@ class subtextProfile extends StatelessWidget {
     return Text(
       // "siempolen168@gmail.com",
       label!,
-      style: TextStyle(color: Colors.grey, fontSize: 15),
+      style: TextStyle(color: Colors.black87, fontSize: 15),
     );
   }
 }

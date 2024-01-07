@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:delivery_app/constant/constant.dart';
+import 'package:delivery_app/controller/auth_Controller.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/controller/data_controller.dart';
 import 'package:delivery_app/model/profile_model.dart';
@@ -7,6 +8,7 @@ import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/view/detial_Screen.dart';
 import 'package:delivery_app/view/see_more_Screen.dart';
 import 'package:delivery_app/view/tabScreen/cart_screen.dart';
+import 'package:delivery_app/view/tabScreen/my_profile.dart';
 import 'package:delivery_app/widget/resusable_home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 DataController _dataController = Get.find();
 CartController _controller = Get.find();
+AuthController _authController = Get.find();
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
@@ -120,25 +123,30 @@ class _HomeScreenState extends State<HomeScreen>
                 padding: const EdgeInsets.only(left: 30),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Icon(
-                          dataProfile.icons,
-                          size: 28,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          dataProfile.label.toString(),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Outfit'),
-                        )
-                      ],
+                    InkWell(
+                      onTap: () {
+                        index == 0 ? Get.to(() => MyProfile()) : null;
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            dataProfile.icons,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            dataProfile.label.toString(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Outfit'),
+                          )
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -157,7 +165,9 @@ class _HomeScreenState extends State<HomeScreen>
             child: Row(
               children: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _authController.logout();
+                    },
                     child: Text(
                       "Sign-out",
                       style: TextStyle(

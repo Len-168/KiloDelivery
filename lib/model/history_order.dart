@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:delivery_app/repository/data.dart';
+import 'package:intl/intl.dart';
 
 class HistoryOrder {
   final int totalQty;
@@ -35,32 +36,7 @@ class HistoryOrder {
       "orderDate": orderDate,
     };
   }
+
+  String formatDate() =>
+      DateFormat("yyyy/MMM/dd hh:mm a").format(DateTime.parse(orderDate));
 }
-
-// class HistoryOrder {
-//   final int totalQty;
-//   final double totalAmount;
-//   final List<ProductDetile> items;
-//   final String orderDate;
-
-//   HistoryOrder(this.totalQty, this.totalAmount, this.items, this.orderDate);
-
-//   factory HistoryOrder.fromJson(Map<String, dynamic> json) {
-//     List<ProductDetile> items = List<ProductDetile>.from(
-//         json['items'].map((item) => ProductDetile.fromJson(item)));
-
-//     return HistoryOrder(
-//       json['totalQty'],
-//       json['totalAmount'],
-//       items,
-//       json['orderDate'],
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() => {
-//         'totalQty': totalQty,
-//         'totalAmount': totalAmount,
-//         'items': items.map((item) => item.toMap()).toList(),
-//         'orderDate': orderDate,
-//       };
-// }

@@ -17,7 +17,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  late CartController _cartController = Get.find();
+  CartController _cartController = Get.find();
 
   void initState() {
     _cartController.getProductCart();
@@ -178,27 +178,38 @@ class _CartScreenState extends State<CartScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "-",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                        Text(
-                                          "1",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
+                                        InkWell(
+                                          onTap: () => _cartController
+                                              .deCreateQty(index),
+                                          child: Text(
+                                            "-",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15),
                                           ),
                                         ),
-                                        Text(
-                                          "+",
-                                          style: TextStyle(
+                                        Obx(
+                                          () => Text(
+                                            "${_cartController.productDetails[index].qty}",
+                                            style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 15),
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _cartController.increQty(index);
+                                          },
+                                          child: Text(
+                                            "+",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15),
+                                          ),
                                         ),
                                       ],
                                     ),

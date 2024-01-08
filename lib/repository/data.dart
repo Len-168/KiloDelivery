@@ -4,6 +4,7 @@ class ProductDetile {
   String? deliverInfo;
   String? Policy;
   String? image;
+  int qty;
 
   ProductDetile({
     required this.title,
@@ -11,6 +12,7 @@ class ProductDetile {
     required this.deliverInfo,
     required this.Policy,
     required this.image,
+    this.qty = 1,
   });
 
   factory ProductDetile.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class ProductDetile {
       deliverInfo: json['deliverInfo'],
       Policy: json['Policy'],
       image: json['image'],
+      qty: json['qty'] ?? 0,
     );
   }
 
@@ -30,6 +33,7 @@ class ProductDetile {
       'deliverInfo': deliverInfo,
       'Policy': Policy,
       'image': image,
+      'qty': qty,
     };
   }
 }

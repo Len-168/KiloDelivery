@@ -1,104 +1,98 @@
 import 'package:delivery_app/constant/constant.dart';
-import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/model/history_order.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ViewHistroy extends StatelessWidget {
   ViewHistroy({super.key, required this.data});
 
   final HistoryOrder data;
-  final CartController _controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: ReuseAppBar(
-          leading: Icons.arrow_back_ios_new_outlined,
-          title: "",
-        ),
-        body: ListView(
-          children: [
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: _controller.orderHistorys.length,
-              itemBuilder: (context, index) {
-                final orderItems = _controller.orderHistorys[index];
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          blurRadius: 2,
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 13),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: Image.asset(
-                                  'assets/image/food/6.png',
-                                  height: 80,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            ],
+      backgroundColor: bAppColor,
+      appBar: ReuseAppBar(
+        leading: Icons.arrow_back_ios_new_outlined,
+        title: "Your Order",
+      ),
+      body: ListView(
+        children: [
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: data.items.length,
+            itemBuilder: (context, index) {
+              final orderItems = data.items[index];
+
+              return Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+                child: Container(
+                  width: double.infinity,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      // border: Border(
+                      //   bottom: BorderSide(color: Colors.grey),
+                      // ),
+                      ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 80,
+                        height: 80,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.asset(
+                            orderItems.image.toString(),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Coca",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Outfit',
+                      ),
+                      SizedBox(width: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${orderItems.title}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Text(
+                                  "Total \$ ${(orderItems.price)! * (orderItems.qty)}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 15),
-                              Row(
-                                children: [
-                                  Text(
-                                    "\$ 20",
-                                    textAlign: TextAlign.center,
+                                SizedBox(width: 100),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0),
+                                  child: Text(
+                                    "X ${orderItems.qty}",
                                     style: TextStyle(
-                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: 'Outfit',
+                                      fontSize: 15,
                                       color: bPrimaryColor,
                                     ),
                                   ),
-                                  SizedBox(width: 50),
-                                  Text("12-11-2024"),
-                                  // Text(orderItems.orderDate),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                );
-              },
-            )
-          ],
-        ));
+                ),
+              );
+            },
+          )
+        ],
+      ),
+    );
   }
 }

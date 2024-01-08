@@ -62,7 +62,7 @@ class HistoryScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             subtitle: Text(
-                              'Kilo Delivery',
+                              order.formatDate(),
                             ),
                             trailing: Column(
                               children: [

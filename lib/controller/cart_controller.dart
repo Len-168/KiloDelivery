@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 class CartController extends GetxController {
   final productDetails = <ProductDetile>[].obs;
   final lstFavItems = <ProductDetile>[].obs;
-  final historyItems = <ProductDetile>[].obs;
   final productStorage = ProductStorage.instance;
   var favIconState = false;
 
@@ -133,8 +132,10 @@ class CartController extends GetxController {
     double totalAmount = 0.0;
     var orderDate = DateTime.now().toString();
     productDetails.forEach((item) {
-      totalAmount += item.price ?? 0.0;
+      totalAmount += (item.price ?? 0.0) * item.qty;
     });
+
+    debugPrint(totalAmount.toString());
 
     final HistoryOrder order =
         HistoryOrder(totalAty, totalAmount, productDetails, orderDate);
@@ -154,5 +155,17 @@ class CartController extends GetxController {
   void getOrderHistory() async {
     final allOrders = await productStorage.getAllHistoryOrder();
     orderHistorys(allOrders);
+  }
+
+  void increQty(index) {
+    var product = productDetails.elementAt(index);
+    product.qty += 1;
+    productDetails[index] = product;
+  }
+
+  void deCreateQty(index) {
+    var product = productDetails.elementAt(index);
+    product.qty -= 1;
+    productDetails[index] = product;
   }
 }

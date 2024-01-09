@@ -39,4 +39,13 @@ class HistoryOrder {
 
   String formatDate() =>
       DateFormat("yyyy/MMM/dd hh:mm a").format(DateTime.parse(orderDate));
+
+  int getItemsCount() {
+    var totalQty = 0;
+    items.forEach((element) {
+      totalQty += element.qty;
+    });
+    print('------->>${totalQty}');
+    return totalQty;
+  }
 }

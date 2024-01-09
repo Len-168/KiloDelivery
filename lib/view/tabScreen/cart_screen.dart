@@ -49,17 +49,46 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget _buildBody() {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await Future.delayed(Duration(seconds: 1));
-        _cartController.productDetails;
-      },
-      child: ListView(
+    return Obx(
+      () => ListView(
         children: [
-          _buildGuySwipe(),
-          _buildListCart(),
+          _cartController.productDetails.isEmpty
+              ? _buildNotResult()
+              : Column(
+                  children: [
+                    _buildGuySwipe(),
+                    _buildListCart(),
+                  ],
+                )
         ],
       ),
+    );
+  }
+
+  Widget _buildNotResult() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 200),
+              Image.asset(
+                OrderIcons,
+              ),
+              SizedBox(height: 15),
+              Text(
+                "No Order yet",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -262,9 +291,17 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
-                pymentcard(label: "Visa Card", card_type: visa_card),
+                pymentcard(
+                  label: "Visa Card",
+                  card_type: visa_card,
+                  value: 1,
+                ),
                 SizedBox(height: 10),
-                pymentcard(label: "Master Card", card_type: master_card),
+                pymentcard(
+                  label: "Master Card",
+                  card_type: master_card,
+                  value: 0,
+                ),
                 SizedBox(height: 10),
                 Text(
                   "Delivery Address",
@@ -378,11 +415,12 @@ class pymentcard extends StatelessWidget {
     super.key,
     required this.label,
     required this.card_type,
+    required this.value,
   });
 
   String label;
   String card_type;
-
+  int value;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -401,9 +439,10 @@ class pymentcard extends StatelessWidget {
         child: Row(
           children: [
             Radio(
-              value: true,
+              value: value,
               groupValue: 1,
               onChanged: (value) {},
+              activeColor: Colors.deepOrangeAccent,
             ),
             Text(
               "$label",

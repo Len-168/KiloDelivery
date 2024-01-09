@@ -25,16 +25,18 @@ class MethodMyprofile extends StatelessWidget {
     required this.label,
     required this.color,
     this.image,
+    this.Value,
   });
   String? label;
   Color? color;
   String? image;
+  int? Value;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Radio(
-          value: false,
+          value: Value,
           onChanged: (value) {},
           groupValue: 1,
           activeColor: bPrimaryColor,

@@ -75,9 +75,7 @@ class ProfileScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
-                              image: NetworkImage(
-                                'https://scontent.fpnh10-1.fna.fbcdn.net/v/t39.30808-6/265994151_1185635701963659_8941339380786737517_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9c7eae&_nc_eui2=AeF5_Y8LA-gibLOfF7k7sRwFkXiBZM5uupGReIFkzm66kftlMbITT5fi_eAsJgFYDWHQGDjDrLrXyv6rYxFUJEUh&_nc_ohc=446cWJ0TMkUAX8fII65&_nc_ht=scontent.fpnh10-1.fna&oh=00_AfBEvJTJLXEYbQneIuba0BaRQupx1xjAdtaRwt-zI_hSfw&oe=659BFA44',
-                              ),
+                              image: AssetImage(profile),
                               fit: BoxFit.cover,
                             ),
                           ),

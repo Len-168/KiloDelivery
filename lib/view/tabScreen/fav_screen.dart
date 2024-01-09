@@ -30,12 +30,48 @@ class _FavScreenState extends State<FavScreen> {
         leading: Icons.arrow_back_ios_new,
         title: "Favorite",
       ),
-      body: ListView(
-        children: [
-          _buildGuySwipe(),
-          _buildListCart(),
-        ],
+      body: Obx(
+        () => ListView(
+          children: [
+            _cartController.lstFavItems.isEmpty
+                ? _buildNotResult()
+                : Column(
+                    children: [
+                      _buildGuySwipe(),
+                      _buildListCart(),
+                    ],
+                  )
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildNotResult() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 200),
+              Image.asset(
+                FavoriteIcons,
+                width: 90,
+              ),
+              SizedBox(height: 15),
+              Text(
+                "No Favorite yet",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

@@ -56,6 +56,19 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  Widget _buildBody() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildLogoHomeScreen(),
+        _buildBoxSerach(),
+        _buildTabBar(),
+        _buildSeeMore(),
+        _buildTabBarView(),
+      ],
+    );
+  }
+
   Widget _buildDrower(BuildContext context) {
     return Drawer(
       backgroundColor: bPrimaryColor,
@@ -82,10 +95,7 @@ class _HomeScreenState extends State<HomeScreen>
                   radius: 37,
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(
-                        'https://scontent.fpnh10-1.fna.fbcdn.net/v/t39.30808-6/265994151_1185635701963659_8941339380786737517_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9c7eae&_nc_eui2=AeF5_Y8LA-gibLOfF7k7sRwFkXiBZM5uupGReIFkzm66kftlMbITT5fi_eAsJgFYDWHQGDjDrLrXyv6rYxFUJEUh&_nc_ohc=446cWJ0TMkUAX8fII65&_nc_ht=scontent.fpnh10-1.fna&oh=00_AfBEvJTJLXEYbQneIuba0BaRQupx1xjAdtaRwt-zI_hSfw&oe=659BFA44'),
-                  ),
+                      radius: 35, backgroundImage: AssetImage(profile)),
                 ),
                 SizedBox(width: 10),
                 Column(
@@ -190,22 +200,9 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildBody() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildLogoHomeScreen(),
-        _buildBoxSerach(),
-        _buildTabBar(),
-        _buildSeeMore(),
-        _buildTabBarView(),
-      ],
-    );
-  }
-
   Padding _buildSeeMore() {
     return Padding(
-      padding: const EdgeInsets.only(top: 25, right: 30, bottom: 5),
+      padding: const EdgeInsets.only(top: 20, right: 30, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -361,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildBoxSerach() {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 30, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, right: 30, bottom: 15),
       child: InkWell(
         onTap: () {
           Get.to(() => SeeMoreScreen());
@@ -398,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildLogoHomeScreen() {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 35, top: 10),
+      padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -406,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen>
             mainText: "Delicious",
             width: 50,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           TextLogoSerach(
             mainText: "food for you",
             width: 45,

@@ -3,6 +3,7 @@
 import 'package:delivery_app/constant/constant.dart';
 import 'package:delivery_app/controller/cart_controller.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
+import 'package:delivery_app/widget/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -95,6 +96,10 @@ class _FavScreenState extends State<FavScreen> {
                   SlidableAction(
                     onPressed: (context) {
                       _cartController.Save(FavData);
+                      showMessage(
+                          message: "Add Successful",
+                          icon: Icons.check,
+                          context: Get.context!);
                     },
                     backgroundColor: Colors.green,
                     icon: Icons.shopping_cart_outlined,
@@ -108,6 +113,10 @@ class _FavScreenState extends State<FavScreen> {
                   SlidableAction(
                     onPressed: (context) {
                       _cartController.deleteFavItem(FavData);
+                      showMessage(
+                          message: "Delete Successful",
+                          icon: Icons.check,
+                          context: Get.context!);
                     },
                     backgroundColor: Colors.red,
                     icon: Icons.delete,

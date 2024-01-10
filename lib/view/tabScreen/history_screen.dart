@@ -58,11 +58,10 @@ class HistoryScreen extends StatelessWidget {
                                     ),
                                   ),
                                   title: Text(
-                                    'Len',
+                                    '#Order ${order.formatDate1()}',
                                     style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   subtitle: Text(
                                     order.formatDate(),

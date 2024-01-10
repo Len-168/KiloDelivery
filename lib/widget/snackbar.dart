@@ -23,7 +23,7 @@ void showMessage(
       ),
     ),
     elevation: 0,
-    duration: Duration(seconds: 2),
+    duration: Duration(milliseconds: 500),
     backgroundColor: Colors.green.withOpacity(0.7),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(

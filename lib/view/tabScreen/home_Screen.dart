@@ -136,6 +136,7 @@ class _HomeScreenState extends State<HomeScreen>
                     InkWell(
                       onTap: () {
                         index == 0 ? Get.to(() => MyProfile()) : null;
+                        index == 1 ? Get.to(() => CartScreen()) : null;
                       },
                       child: Row(
                         children: [
@@ -239,22 +240,22 @@ class _HomeScreenState extends State<HomeScreen>
         final getProduct = _dataController.homeList[index];
         return Padding(
           padding: const EdgeInsets.only(right: 30),
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 60,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => DetialScreen(
-                          data: _dataController.homeList[index],
-                        ),
-                      );
-                    },
-                    child: Container(
+          child: InkWell(
+            onTap: () {
+              Get.to(
+                () => DetialScreen(
+                  data: _dataController.homeList[index],
+                ),
+              );
+            },
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Container(
                       width: 180,
                       height: 230,
                       decoration: BoxDecoration(
@@ -297,30 +298,30 @@ class _HomeScreenState extends State<HomeScreen>
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 15,
-                  child: Center(
-                    child: Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(80),
-                        child: Image.asset(
-                          getProduct.image.toString(),
-                          fit: BoxFit.cover,
+                  ],
+                ),
+                Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 15,
+                    child: Center(
+                      child: Container(
+                        width: 130,
+                        height: 130,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(80),
+                          child: Image.asset(
+                            getProduct.image.toString(),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  )),
-            ],
+                    )),
+              ],
+            ),
           ),
         );
       },

@@ -8,6 +8,7 @@ import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:delivery_app/widget/snackbar.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -100,8 +101,14 @@ class _CartScreenState extends State<CartScreen> {
         itemCount: _cartController.productDetails.length,
         itemBuilder: (context, index) {
           final CartData = _cartController.productDetails[index];
+
           return Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom:
+                  index == _cartController.productDetails.length - 1 ? 80 : 20,
+            ),
             child: Slidable(
                 endActionPane: ActionPane(
                   motion: BehindMotion(),
@@ -112,6 +119,10 @@ class _CartScreenState extends State<CartScreen> {
                     SlidableAction(
                       onPressed: (context) {
                         _cartController.saveFavItem(CartData);
+                        showMessage(
+                            message: "Add Successful",
+                            icon: Icons.check,
+                            context: Get.context!);
                       },
                       backgroundColor: Colors.green,
                       icon: Icons.favorite_border_outlined,
@@ -124,6 +135,10 @@ class _CartScreenState extends State<CartScreen> {
                     SlidableAction(
                       onPressed: (context) {
                         _cartController.deleteCart(CartData);
+                        showMessage(
+                            message: "Delete Successful",
+                            icon: Icons.check,
+                            context: Get.context!);
                       },
                       backgroundColor: Colors.red,
                       icon: Icons.delete,
@@ -146,107 +161,104 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 13),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(40),
-                              child: Image.asset(
-                                '${CartData.image}',
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          ],
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.asset(
+                            '${CartData.image}',
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, left: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "${CartData.title}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Outfit',
+                            Container(
+                              width: 165,
+                              child: Text(
+                                "${CartData.title}",
+                                // textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Outfit',
+                                ),
                               ),
                             ),
                             SizedBox(height: 15),
-                            Row(
+                            Text(
+                              "\$ ${CartData.price}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Outfit',
+                                color: bPrimaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35, right: 7),
+                        child: Container(
+                          width: 70,
+                          decoration: BoxDecoration(
+                            color: bPrimaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "\$ ${CartData.price}",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Outfit',
-                                    color: bPrimaryColor,
+                                InkWell(
+                                  onTap: () =>
+                                      _cartController.deCreateQty(index),
+                                  child: Text(
+                                    "-",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
                                   ),
                                 ),
-                                SizedBox(width: 100),
-                                Container(
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    color: bPrimaryColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10,
-                                      right: 10,
-                                      bottom: 5,
-                                      top: 5,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                          onTap: () => _cartController
-                                              .deCreateQty(index),
-                                          child: Text(
-                                            "-",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                        Obx(
-                                          () => Text(
-                                            "${_cartController.productDetails[index].qty}",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _cartController.increQty(index);
-                                          },
-                                          child: Text(
-                                            "+",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                      ],
+                                Obx(
+                                  () => Text(
+                                    "${_cartController.productDetails[index].qty}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
                                     ),
                                   ),
-                                )
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    _cartController.increQty(index);
+                                  },
+                                  child: Text(
+                                    "+",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                ),
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         ),
                       )
                     ],

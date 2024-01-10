@@ -191,7 +191,6 @@ class SeeMoreScreen extends StatelessWidget {
                             width: 135,
                             height: 135,
                             decoration: BoxDecoration(
-                              color: Colors.amber,
                               borderRadius: BorderRadius.circular(100),
                               image: DecorationImage(
                                 image: AssetImage(

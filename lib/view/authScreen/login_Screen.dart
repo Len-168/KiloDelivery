@@ -8,10 +8,26 @@ import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen>
+    with SingleTickerProviderStateMixin {
   AuthController _authController = Get.find();
+  final _formKeyLogin = GlobalKey<FormState>();
+  final _formKeySigup = GlobalKey<FormState>();
+  @override
+  void initState() {
+    _authController.tabcontroller = TabController(length: 2, vsync: this);
+    _authController.tabcontroller.addListener(() {
+      _authController.updateCurrentIndex();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +54,7 @@ class LoginScreen extends StatelessWidget {
     return Expanded(
       child: Obx(
         () => TabBarView(
+          controller: _authController.tabcontroller,
           children: [
             _buildLoginTab(),
             _buildSignUp(),
@@ -77,6 +94,7 @@ class LoginScreen extends StatelessWidget {
           Container(
             child: TabBar(
               isScrollable: false,
+              controller: _authController.tabcontroller,
               dividerColor: Colors.transparent,
               indicatorWeight: 4,
               splashFactory: NoSplash.splashFactory,
@@ -102,92 +120,138 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildLoginTab() {
-    return Container(
-        child: Padding(
-      padding: const EdgeInsets.only(left: 40, right: 40),
-      child: ListView(
-        children: [
-          SizedBox(height: 30),
-          TextFieldLable(labelText: "Email address"),
-          TextFormFieldReuse(
-            controller: _authController.Lemail,
-          ),
-          SizedBox(height: 20),
-          TextFieldLable(labelText: "Password"),
-          TextFormFieldReuse(
-            onPressedFunction: () {
-              _authController.showHidePass();
-            },
-            icons: _authController.showPassword.value
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            controller: _authController.Lpassword,
-            obscureText: _authController.showPassword.value,
-          ),
-          SizedBox(height: 15),
-          HelperTextFiled(Label: "Forgot Password?"),
-          SizedBox(height: 70),
-          InkWell(
-            onTap: () {
-              String email = _authController.Lemail.text;
-              String password = _authController.Lpassword.text;
-              _authController.login(email, password);
-            },
-            child: buttonApp(
-              label: "Login",
-              Left: 0,
-              Right: 0,
+    return Form(
+      key: _formKeyLogin,
+      child: Container(
+          child: Padding(
+        padding: const EdgeInsets.only(left: 40, right: 40),
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            TextFieldLable(labelText: "Email address"),
+            TextFormFieldReuse(
+              controller: _authController.Lemail,
+              validator: (value) {
+                if (value == null || value.isEmail) {
+                  return null;
+                }
+                return 'Invalid email';
+              },
             ),
-          ),
-        ],
-      ),
-    ));
+            SizedBox(height: 15),
+            TextFieldLable(labelText: "Password"),
+            TextFormFieldReuse(
+              onPressedFunction: () {
+                _authController.showHidePass();
+              },
+              icons: _authController.showPassword.value
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              controller: _authController.Lpassword,
+              obscureText: _authController.showPassword.value,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "invalid password";
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 15),
+            HelperTextFiled(Label: "Forgot Password?"),
+            SizedBox(height: 60),
+            InkWell(
+              onTap: () {
+                if (_formKeyLogin.currentState!.validate()) {
+                  _authController.login(
+                    _authController.Lemail.text.trim(),
+                    _authController.Lpassword.text,
+                  );
+                }
+              },
+              child: buttonApp(
+                label: "Login",
+                Left: 0,
+                Right: 0,
+              ),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 
   Widget _buildSignUp() {
-    return Container(
-        child: Padding(
-      padding: const EdgeInsets.only(left: 40, right: 40),
-      child: ListView(
-        children: [
-          SizedBox(height: 30),
-          TextFieldLable(labelText: "Username"),
-          TextFormFieldReuse(
-            controller: _authController.Rusername,
-          ),
-          SizedBox(height: 20),
-          TextFieldLable(labelText: "Email address"),
-          TextFormFieldReuse(
-            controller: _authController.Remail,
-          ),
-          SizedBox(height: 20),
-          TextFieldLable(
-            labelText: "Password",
-          ),
-          TextFormFieldReuse(
-            onPressedFunction: () {
-              _authController.showHidePass();
-            },
-            icons: _authController.showPassword.value
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            controller: _authController.Rpassword,
-            obscureText: _authController.showPassword.value,
-          ),
-          SizedBox(height: 15),
-          HelperTextFiled(Label: "Alreay have an account?"),
-          SizedBox(height: 25),
-          InkWell(
-            onTap: () {
-              String username = _authController.Rpassword.text.trim();
-              String email = _authController.Remail.text.trim();
-              String password = _authController.Rpassword.text.trim();
-              _authController.register(username, email, password);
-            },
-            child: buttonApp(label: "Sign Up", Left: 0, Right: 0),
-          ),
-        ],
-      ),
-    ));
+    return Form(
+      key: _formKeySigup,
+      child: Container(
+          child: Padding(
+        padding: const EdgeInsets.only(left: 40, right: 40),
+        child: ListView(
+          children: [
+            SizedBox(height: 10),
+            TextFieldLable(labelText: "Username"),
+            TextFormFieldReuse(
+              controller: _authController.Rusername,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "username is required";
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 15),
+            TextFieldLable(labelText: "Email address"),
+            TextFormFieldReuse(
+              controller: _authController.Remail,
+              validator: (value) {
+                if (value == null || value.isEmail) {
+                  return null;
+                }
+                return 'Invalid email';
+              },
+            ),
+            SizedBox(height: 15),
+            TextFieldLable(
+              labelText: "Password",
+            ),
+            TextFormFieldReuse(
+              onPressedFunction: () {
+                _authController.showHidePass();
+              },
+              icons: _authController.showPassword.value
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              controller: _authController.Rpassword,
+              obscureText: _authController.showPassword.value,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Invalid password';
+                }
+                // else if (value.split(" ").length <= 8) {
+                //   return 'Password must be at least 8 characters long.';
+                // }
+                return null;
+              },
+            ),
+            SizedBox(height: 15),
+            HelperTextFiled(Label: "Alreay have an account?"),
+            SizedBox(height: 20),
+            InkWell(
+              onTap: () {
+                if (_formKeySigup.currentState!.validate()) {
+                  _authController.register(
+                    _authController.Rusername.text.trim(),
+                    _authController.Remail.text.trim(),
+                    _authController.Rpassword.text.trim(),
+                  );
+                }
+              },
+              child: buttonApp(label: "Sign Up", Left: 0, Right: 0),
+            ),
+            SizedBox(height: 10),
+          ],
+        ),
+      )),
+    );
   }
 }

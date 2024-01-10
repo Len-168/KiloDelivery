@@ -40,6 +40,10 @@ class HistoryOrder {
   String formatDate() =>
       DateFormat("yyyy/MMM/dd hh:mm a").format(DateTime.parse(orderDate));
 
+  String formatDate1() => DateFormat("yyyymmmdd").format(
+        DateTime.parse(orderDate),
+      );
+
   int getItemsCount() {
     var totalQty = 0;
     items.forEach((element) {

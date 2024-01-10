@@ -2,7 +2,6 @@
 import 'package:delivery_app/model/history_order.dart';
 import 'package:delivery_app/repository/repo_local.dart';
 import 'package:delivery_app/repository/data.dart';
-import 'package:delivery_app/widget/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,8 +26,6 @@ class CartController extends GetxController {
         await productStorage.putProductDetail(productDetile, "ProductItems");
     if (isSave) {
       calculateTotal();
-      showMessage(
-          message: "Add Successful", icon: Icons.check, context: Get.context!);
     }
   }
 
@@ -45,8 +42,6 @@ class CartController extends GetxController {
     productDetails.removeAt(index);
     await productStorage.putProductDetails(productDetails, "ProductItems");
     calculateTotal();
-    showMessage(
-        message: "Remove Successful", icon: Icons.check, context: Get.context!);
   }
 
 //
@@ -78,17 +73,13 @@ class CartController extends GetxController {
       favIconState = false;
       update();
       debugPrint("save == false");
-      showMessage(
-          message: "Remove Successful",
-          icon: Icons.check,
-          context: Get.context!);
+
       return;
     } else {
       final isSave =
           await productStorage.putProductDetail(productDetile, "FavItems");
       favIconState = isSave;
-      showMessage(
-          message: "Add Successful", icon: Icons.check, context: Get.context!);
+
       update();
     }
   }
@@ -108,10 +99,6 @@ class CartController extends GetxController {
       allProducts.removeAt(index);
       await productStorage.putProductDetails(allProducts, "FavItems");
       getProductFavItem();
-      showMessage(
-          message: "Delete Successful",
-          icon: Icons.check,
-          context: Get.context!);
     }
   }
 
@@ -148,8 +135,6 @@ class CartController extends GetxController {
     productDetails.clear();
     getOrderHistory();
     calculateTotal();
-    showMessage(
-        message: "Order Successful", icon: Icons.check, context: Get.context!);
   }
 
   void getOrderHistory() async {

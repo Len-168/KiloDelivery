@@ -10,33 +10,34 @@ class AuthController extends GetxController {
   Rx<User> user = User(email: "", password: "").obs;
   RxBool showPassword = true.obs;
 
-  final Remail = TextEditingController();
+  late TabController tabcontroller;
+  RxInt currentIndex = 0.obs;
+
+  final Remail = TextEditingController(text: "hello123");
   final Rpassword = TextEditingController();
   final Rusername = TextEditingController();
-  final Lemail = TextEditingController();
+  final Lemail = TextEditingController(text: "hello123");
   final Lpassword = TextEditingController();
 
   void register(String username, String email, String password) async {
-    if (username == "" || email == "" || password == "") {
-      Get.snackbar("Error", "Field null");
-    } else {
-      user.value = User(email: email, password: password);
-      box.write('user', {'email': email, 'password': password});
-      Get.snackbar("Succes", "Register success");
-    }
+    user.value = User(email: email, password: password);
+    box.write('user', {'email': email, 'password': password});
+    Get.snackbar("Succes", "Register success");
+    Rusername.clear();
+    Remail.clear();
+    Rpassword.clear();
+    tabcontroller.animateTo(0);
   }
 
   void login(String email, String password) async {
-    if (email == "" || password == "") {
-      Get.snackbar("Error", "Field null");
+    final getUser = box.read('user');
+    if (email == getUser?['email'] && password == getUser?['password']) {
+      Get.offAll(() => NavigationScreen());
+      box.write('isLogin', true);
+      Lemail.clear();
+      Lpassword.clear();
     } else {
-      final getUser = box.read('user');
-      if (email == getUser?['email'] && password == getUser?['password']) {
-        Get.offAll(() => NavigationScreen());
-        box.write('isLogin', true);
-      } else {
-        Get.snackbar("Error", "No Account");
-      }
+      Get.snackbar("Error", "No Account");
     }
   }
 
@@ -50,7 +51,10 @@ class AuthController extends GetxController {
   }
 
   void showHidePass() {
-    print("---------Click - Controller");
     showPassword.value = !showPassword.value;
+  }
+
+  void updateCurrentIndex() {
+    currentIndex(tabcontroller.index);
   }
 }

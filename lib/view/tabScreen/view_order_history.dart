@@ -50,14 +50,19 @@ class ViewHistroy extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "${orderItems.title}",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              Container(
+                                width: Get.width / 2.3,
+                                child: Text(
+                                  "${orderItems.title}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
                               ),
                               SizedBox(height: 10),
                               Text(
-                                "Total \$ ${(orderItems.price)! * (orderItems.qty)}",
+                                "Total \$ ${((orderItems.price)! * (orderItems.qty)).toStringAsFixed(2)}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -114,7 +119,7 @@ class ViewHistroy extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "\$ ${data.totalAmount}",
+                        "\$ ${data.totalAmount.toStringAsFixed(2)}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -144,41 +149,47 @@ class ViewHistroy extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.snackbar("Alert", "Comming Soon");
-                        },
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(170, 60),
-                            backgroundColor: Colors.transparent,
-                            elevation: 0,
-                            side: BorderSide(
-                              color: Colors.grey,
-                            )),
-                        child: Text(
-                          "Rating",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      SizedBox(
+                        width: Get.width / 2.3,
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.snackbar("Alert", "Comming Soon");
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              side: BorderSide(
+                                color: Colors.grey,
+                              )),
+                          child: Text(
+                            "Rating",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => CartScreen());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          fixedSize: const Size(170, 60),
-                          backgroundColor: bPrimaryColor,
-                          elevation: 0,
-                        ),
-                        child: Text(
-                          "Order Again",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      SizedBox(
+                        width: Get.width / 2.3,
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => CartScreen());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: bPrimaryColor,
+                            elevation: 0,
+                          ),
+                          child: Text(
+                            "Order Again",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),

@@ -156,17 +156,21 @@ class _FavScreenState extends State<FavScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 20),
+                      padding: const EdgeInsets.only(top: 10, left: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "${FavData.title}",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Outfit',
+                          Container(
+                            width: Get.width / 2.3,
+                            child: Text(
+                              "${FavData.title}",
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Outfit',
+                              ),
                             ),
                           ),
                           SizedBox(height: 15),

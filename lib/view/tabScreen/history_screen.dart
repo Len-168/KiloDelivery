@@ -60,11 +60,12 @@ class HistoryScreen extends StatelessWidget {
                                   title: Text(
                                     '#Order ${order.formatDate1()}',
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w500),
                                   ),
                                   subtitle: Text(
                                     order.formatDate(),
+                                    style: TextStyle(fontSize: 13),
                                   ),
                                   trailing: Column(
                                     children: [
@@ -72,12 +73,10 @@ class HistoryScreen extends StatelessWidget {
                                         "\$${order.totalAmount.toString()}",
                                         style: TextStyle(
                                           color: Colors.red,
-                                          fontSize: 20,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                      // Text(order.orderDate),
-                                      // Text(YYYY_MM_DD.toString()),
                                     ],
                                   )),
                             ),

@@ -2,6 +2,7 @@
 import 'package:delivery_app/model/history_order.dart';
 import 'package:delivery_app/repository/repo_local.dart';
 import 'package:delivery_app/repository/data.dart';
+import 'package:delivery_app/widget/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +43,7 @@ class CartController extends GetxController {
     productDetails.removeAt(index);
     await productStorage.putProductDetails(productDetails, "ProductItems");
     calculateTotal();
+    update();
   }
 
 //
@@ -81,6 +83,8 @@ class CartController extends GetxController {
       favIconState = isSave;
 
       update();
+      showMessage(
+          message: "Add Successful", icon: Icons.check, context: Get.context!);
     }
   }
 
@@ -100,6 +104,8 @@ class CartController extends GetxController {
       await productStorage.putProductDetails(allProducts, "FavItems");
       getProductFavItem();
     }
+    showMessage(
+        message: "Delete Successful", icon: Icons.check, context: Get.context!);
   }
 
 //
@@ -135,6 +141,7 @@ class CartController extends GetxController {
     productDetails.clear();
     getOrderHistory();
     calculateTotal();
+    update();
   }
 
   void getOrderHistory() async {
@@ -150,7 +157,9 @@ class CartController extends GetxController {
 
   void deCreateQty(index) {
     var product = productDetails.elementAt(index);
-    product.qty -= 1;
-    productDetails[index] = product;
+    if (product.qty > 1) {
+      product.qty -= 1;
+      productDetails[index] = product;
+    }
   }
 }

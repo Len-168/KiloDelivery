@@ -27,25 +27,32 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: bAppColor,
-      appBar: ReuseAppBar(
-        leading: Icons.arrow_back_ios_new,
-        title: "Order",
-      ),
-      floatingActionButton: InkWell(
-        onTap: () {
-          _showBottomSheet(context, _cartController.getCheckOutOrder());
-        },
-        child: buttonApp(
-          label: 'Check out',
-          Right: 30,
-          Left: 30,
-        ),
-      ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
-      body: _buildBody(),
+    return GetBuilder<CartController>(
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: bAppColor,
+          appBar: ReuseAppBar(
+            leading: Icons.arrow_back_ios_new,
+            title: "Order",
+          ),
+          floatingActionButton: _cartController.totalOrderQty > 0
+              ? InkWell(
+                  onTap: () {
+                    _showBottomSheet(
+                        context, _cartController.getCheckOutOrder());
+                  },
+                  child: buttonApp(
+                    label: 'Check out',
+                    Right: 30,
+                    Left: 30,
+                  ),
+                )
+              : null,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.miniCenterFloat,
+          body: _buildBody(),
+        );
+      },
     );
   }
 
@@ -160,14 +167,12 @@ class _CartScreenState extends State<CartScreen> {
                       )
                     ],
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 15,
-                        ),
-                        child: ClipRRect(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ClipRRect(
                           borderRadius: BorderRadius.circular(40),
                           child: Image.asset(
                             '${CartData.image}',
@@ -175,93 +180,96 @@ class _CartScreenState extends State<CartScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 165,
-                              child: Text(
-                                "${CartData.title}",
-                                // textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Outfit',
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              "\$ ${CartData.price}",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Outfit',
-                                color: bPrimaryColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35, right: 7),
-                        child: Container(
-                          width: 70,
-                          decoration: BoxDecoration(
-                            color: bPrimaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                        SizedBox(width: 15),
+                        Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 10, right: 10, bottom: 5, top: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                InkWell(
-                                  onTap: () =>
-                                      _cartController.deCreateQty(index),
-                                  child: Text(
-                                    "-",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
+                                Text(
+                                  "${CartData.title}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Outfit',
                                   ),
                                 ),
-                                Obx(
-                                  () => Text(
-                                    "${_cartController.productDetails[index].qty}",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "\$ ${CartData.price}",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Outfit',
+                                        color: bPrimaryColor,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    _cartController.increQty(index);
-                                  },
-                                  child: Text(
-                                    "+",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15),
-                                  ),
+                                    Container(
+                                      width: 70,
+                                      padding: EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
+                                          top: 5,
+                                          bottom: 5),
+                                      decoration: BoxDecoration(
+                                        color: bPrimaryColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () => _cartController
+                                                .deCreateQty(index),
+                                            child: Text(
+                                              "-",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          Obx(
+                                            () => Text(
+                                              "${_cartController.productDetails[index].qty}",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              _cartController.increQty(index);
+                                            },
+                                            child: Text(
+                                              "+",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                 )),
           );
@@ -386,8 +394,20 @@ class _CartScreenState extends State<CartScreen> {
                 SizedBox(height: 18),
                 InkWell(
                   onTap: () {
-                    _cartController.prepareForOrder(order);
-                    Navigator.pop(context);
+                    if (_cartController.totalOrderQty > 0) {
+                      _cartController.prepareForOrder(order);
+                      Navigator.pop(context);
+                      showMessage(
+                          message: "Add Successful",
+                          icon: Icons.check,
+                          context: Get.context!);
+                    } else {
+                      Navigator.pop(context);
+                      showMessage(
+                          message: "Not Yet Order !",
+                          icon: Icons.check,
+                          context: Get.context!);
+                    }
                   },
                   child: buttonApp(
                     label: 'Confirm Order',

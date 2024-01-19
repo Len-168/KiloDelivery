@@ -3,6 +3,7 @@ import 'package:delivery_app/repository/data.dart';
 import 'package:delivery_app/widget/AppBar_Reusable.dart';
 import 'package:delivery_app/widget/buttonStyle.dart';
 import 'package:delivery_app/widget/detile_Screen/reusable_detile.dart';
+import 'package:delivery_app/widget/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -96,6 +97,10 @@ class _DetialScreenState extends State<DetialScreen> {
               InkWell(
                 onTap: () {
                   _cartController.Save(widget.data);
+                  showMessage(
+                      message: "Add Successful",
+                      icon: Icons.check,
+                      context: Get.context!);
                 },
                 child: buttonApp(
                   label: 'Add to Card',

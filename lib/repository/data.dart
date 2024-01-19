@@ -65,7 +65,7 @@ List<MainData> lstMainData = [
         image: "assets/image/food/1.png",
       ),
       ProductDetile(
-        title: "Chicken noodle soup",
+        title: "Chicken noodle soupasdasdasd",
         price: 13.5,
         deliverInfo:
             "In business, delivery time is the elapsed time between the start of work on an order and the completion of work on that order",

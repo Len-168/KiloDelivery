@@ -157,6 +157,8 @@ class SeeMoreScreen extends StatelessWidget {
                                   child: Text(
                                     "${_getProduct.title}",
                                     textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,

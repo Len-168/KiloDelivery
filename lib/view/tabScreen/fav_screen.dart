@@ -28,7 +28,6 @@ class _FavScreenState extends State<FavScreen> {
     return Scaffold(
       backgroundColor: bAppColor,
       appBar: ReuseAppBar(
-        leading: Icons.arrow_back_ios_new,
         title: "Favorite",
       ),
       body: Obx(
@@ -159,6 +158,7 @@ class _FavScreenState extends State<FavScreen> {
                       padding: const EdgeInsets.only(top: 10, left: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
                             width: Get.width / 2.3,

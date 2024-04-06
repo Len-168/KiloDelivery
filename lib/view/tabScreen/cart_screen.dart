@@ -32,7 +32,6 @@ class _CartScreenState extends State<CartScreen> {
         return Scaffold(
           backgroundColor: bAppColor,
           appBar: ReuseAppBar(
-            leading: Icons.arrow_back_ios_new,
             title: "Order",
           ),
           floatingActionButton: _cartController.totalOrderQty > 0

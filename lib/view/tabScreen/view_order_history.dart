@@ -14,7 +14,6 @@ class ViewHistroy extends StatelessWidget {
     return Scaffold(
       backgroundColor: bAppColor,
       appBar: ReuseAppBar(
-        leading: Icons.arrow_back_ios_new_outlined,
         title: "Your Order",
       ),
       body: Column(
